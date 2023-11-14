@@ -1,52 +1,61 @@
-body{
-    margin:0;
+*{
+    margin: 0;
     padding: 0;
-    background-image:url("https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2019/02/hipertextual-snake-juego-mas-popular-nokia-2019151135.jpg?fit=1200%2C800&quality=50&strip=all&ssl=1");
-    background-size: cover;
-    font-family: sans-serif;
-    height: 100vh;
-    
-}
-.loginbox{
-    width: 320px;
-    height: 420;
-    background: black;
-    color: white;
-    top: 20%;
-    left: 40%;
-    position: absolute;
     box-sizing: border-box;
-    padding: 70px 30px;
-
+    font-family: sans-serif;
 }
-.loginbox .avatar{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    position: absolute;
-    top: -50px;
-    left: calc(50% - 50px);
-}
-.loginbox h1{
-    margin: 0;
-    padding: 0 0 20px;
-    text-align: center;
-    font-size: 22px;
-}
-
-.loginbox label{
-    margin: 0;
-    padding: 0;
-    font-weight: bold;
-    display: block;
-}
-.loginbox input{
+head{
     width: 100%;
-    margin-bottom: 50px;
+    display: inline;
+    text-align: center;
+    margin-top: 0px;
+    position: relative;
 }
-.loginbox input[type="text"],
-.loginbox input[type="password"]{
-    border: none;
-    border-bottom: 1px solid #fff;
-    background: transparent;
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: rosybrown;
+}
+
+.wrapper{
+    width: 65vmin;
+    height: 70vmin;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 5px;
+    background: grey;
+}
+
+.game-details{
+    color: bisque;
+    font-size: 1.2rem;
+    padding: 20px 27px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.play-board{
+    width: 100%;
+    height: 100%;
+    background: black;
+    display: grid;
+    grid-template: repeat(30, 1fr)/ repeat(30, 1fr);
+
+}
+.navbar{
+    background: transparent !important;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.play-board .food{
+    background: red;
+}
+
+.play-board .head{
+    background: green;
 }
