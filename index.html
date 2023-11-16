@@ -13,16 +13,148 @@
     <link rel="stylesheet" href="style.css">
     
     
+    
 </head>
 
 <body>
   <header>
+    <div class="modal fade" id="scoreboard" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitleId">Scoreboard</h5>
+                    <button style="background-color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body scoreboard-modal">
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span class="fw-bold">Rank</span>
+                            <span class="fw-bold">Player</span>
+                            <span class="fw-bold">Score</span>
+                        </li>
+                        <!-- Ejemplos hardcodeados de puntuaciones de jugadores -->
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span><i class="fa-solid fa-crown"></i></span>
+                            <span>Player 1</span>
+                            <span class="badge rounded-pill first-place-badge">5000</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>2</span>
+                            <span>Player 2</span>
+                            <span class="badge rounded-pill custom-badge">4500</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>3</span>
+                            <span>Player 3</span>
+                            <span class="badge rounded-pill custom-badge">4000</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>4</span>
+                            <span>Player 4</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">3500</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>5</span>
+                            <span>Player 5</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">3000</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>6</span>
+                            <span>Player 6</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">2500</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>7</span>
+                            <span>Player 7</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">2000</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>8</i></span>
+                            <span>Player 8</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1900</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>9</span>
+                            <span>Player 9</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1800</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>10</span>
+                            <span>Player 10</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1700</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>11</span>
+                            <span>Player 11</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1600</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>12</span>
+                            <span>Player 12</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1500</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>13</span>
+                            <span>Player 13</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1400</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>14</span>
+                            <span>Player 14</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1300</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span >15</i></span>
+                            <span>Player 15</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1200</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>16</span>
+                            <span>Player 16</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1100</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>17</span>
+                            <span>Player 17</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">1000</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>18</span>
+                            <span>Player 18</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">900</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>19</span>
+                            <span>Player 19</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">800</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>20</span>
+                            <span>Player 20</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">700</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>21</span>
+                            <span>Player 21</span>
+                            <span class="badge bg-primary rounded-pill custom-badge">600</span>
+                        </li>
+
+                        <!-- Aqui se añade cada jugador obtenido de la base de datos, obviamente estos son ejemplos... -->
+                    </ul>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    ¿Quieres participar?   <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">  Regístrate aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
           <div class="modal-content">
               <div class="modal-header">
                   <h5 class="modal-title" id="modalTitleId">Login</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                   <form>
@@ -46,7 +178,7 @@
                   </form>
               </div>
               <div class="modal-footer justify-content-center">
-                  ¿No tienes cuenta? <a style="color: rgb(255, 255, 255);" role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#register">Regístrate aquí</a>
+                  ¿No tienes cuenta? <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">Regístrate aquí</a>
               </div>
           </div>
       </div>
@@ -57,7 +189,7 @@
         <div class="modal-content text-center">
             <div class="modal-header">
                 <h5 class="modal-title" id="registerModalTitle">Registrarse</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
@@ -91,28 +223,25 @@
         const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
     
     </script>
-    <nav class="navbar navbar-expand-sm navbar-light bg-light fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="index.html"><img src="https://www.shutterstock.com/image-illustration/cute-snake-cartoon-260nw-282019523.jpg" height="50px" ></a>
-          <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-              aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="icon">
-            <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
-              <i class="fa-solid fa-gamepad"></i> Login
-            </a>
-        </div>
-    </div>
-  </nav>
   </header>
   
   <main>
-    <h1 style="text-align: center;">SNAKE</h1>
+    <h1 style="text-align: center;" class="game-title">Snake</h1>
     <div class="wrapper">
         <div class="game-details">
-            <div class="score">Puntuación: 10</div>
-            <div class="high-score">Puntuación máxima: 30</div>
+            <div class="icon">
+                <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#scoreboard">
+                    <i class="fa-solid fa-chart-simple"></i> Scoreboard
+                </a>
+            </div>
+            <label class="scoreLabel">
+                Score: 0
+            </label>
+            <div class="icon">
+                <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
+                  <i class="fa-solid fa-gamepad"></i> Login
+                </a>
+            </div>
         </div>
         <div class="play-board"></div>
 
