@@ -4,6 +4,19 @@
     box-sizing: border-box;
     font-family: sans-serif;
 }
+
+.game-title {
+    font-family: 'Roboto', sans-serif; 
+    font-size: 4rem; 
+    font-weight: bold; 
+    color: #ffffff; 
+    text-align: center; 
+    text-transform: uppercase; 
+    letter-spacing: 2px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+}
+
+
 head{
     width: 100%;
     display: inline;
@@ -16,7 +29,7 @@ body{
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: rosybrown;
+    background: #0c192c;
 }
 
 .wrapper{
@@ -26,7 +39,7 @@ body{
     overflow: hidden;
     flex-direction: column;
     border-radius: 5px;
-    background: grey;
+    background: rgb(82, 82, 82);
 }
 
 .game-details{
@@ -61,20 +74,29 @@ body{
 }
 
 .nav-link {
-    display: inline-block;
-    padding: 10px 20px;
-    text-decoration: none;
-    background-color: #3700ff; 
-    color: #fff; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease;
-    border: 2px solid #3000df; 
-    font-family: Arial, sans-serif; 
+    background-image: linear-gradient(to right, #9D50BB 0%, #6E48AA  51%, #9D50BB  100%);
+    margin: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px rgb(233, 187, 255);
+    border-radius: 10px;
+    display: block;
+}
+
+.register{
+    padding: 8px 10px;
+    box-shadow: 0 0 0;
+    text-transform: none;
 }
 
 .nav-link:hover {
-    background-color: #592bff; 
-    color: #fff; 
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
 }
 
 .fa-user {
@@ -134,3 +156,83 @@ label {
 .modal-footer a {
     color: #ffcc00; 
 }
+
+.gradient-text {
+    font-size: 30px; 
+    font-weight: bold; 
+    color: transparent; 
+    background-image: linear-gradient(to right, #7e26e2, #592bff, #7e26e2);
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    
+}
+
+.list-group-item {
+    background-color: #343a40; 
+    border: none; 
+    display: flex; 
+}
+
+.list-group-item:nth-child(odd) {
+    background-color: #3d444a; 
+}
+
+.list-group-item span {
+    flex: 1; 
+    text-align: center; 
+    color: #fff; 
+}
+
+.list-group-item .fw-bold {
+    font-weight: bold;
+    flex: 1;
+}
+
+.first-place-badge {
+    max-width: 140px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 0.8rem;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+    radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
+}
+
+.custom-badge {
+    max-width: 140px;
+    height: 30px;
+    font-weight: bold; 
+    font-size: 0.8rem;
+    margin: 0; 
+    display: flex;
+    background: linear-gradient(45deg, #716f72, #918b94, #313131);
+    justify-content: center; 
+    align-items: center; 
+}
+
+.scoreboard-modal {
+    max-height: 500px; 
+    overflow-y: auto;
+    position: relative;
+}
+
+
+.scoreLabel {
+    background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
+    margin: 10px;
+    padding: 10px 15px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    border-radius: 10px;
+    display: block;
+  }
+
+
+ 
