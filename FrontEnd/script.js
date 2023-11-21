@@ -1,5 +1,4 @@
 // Variables para el sonido
-
 var sfx = {
     move: new Howl({
         src: ['/MoveSnake.mp3'],
@@ -25,8 +24,6 @@ var music = {
 }
 // Variable para apagar y prender la musica.
 var musicStatus = 1;
-
-
 
 // Variables del tablero
 var blockSize = 25;
@@ -80,12 +77,12 @@ function restartGame() {
     scoreLabel.textContent = "Score: " + score;
     placeFood();
 }
+
 function update(){
     if (gameOver) {
         restartGame();
         return;
     }
-
     movable = true;
     let currentSquare = 0;
     for (let i = 0; i < cols; i++) {
@@ -133,16 +130,13 @@ function update(){
     context.fillStyle = gradient;
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
-
     // Condiciones para terminar el juego.
-
     // Salirse del tablero
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
         alert("Game Over!!");
     }
-
     // Chocar con su propio cuerpo.
     for(let i = 0; i < snakeBody.length; i++){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
@@ -151,15 +145,10 @@ function update(){
             alert("Game Over!!");
         }
     }
-
-
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
     for (let i = 0; i < snakeBody.length; i++){
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
-
-    
-
 }
 
 function changeDirection(event){
@@ -205,3 +194,8 @@ function changeMusic(){
     }
 
     }
+
+
+function findHighScores(){
+    //Hacer un get de usuarios con sus scores, ver que que lugar quedo el score actual. Si es mayor al ultimo Agregar Score con el usuario
+}
