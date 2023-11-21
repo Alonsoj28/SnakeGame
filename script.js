@@ -67,9 +67,20 @@ window.onload = function(){
     //update();
     setInterval(update, (1000/10) * dificulty); // Se actualiza el juego cada 100 milisegundos.
 }
-
+// Función para reiniciar el juego
+function restartGame() {
+    gameOver = false;
+    snakeX = blockSize * 5;
+    snakeY = blockSize * 5;
+    velocityX = 0;
+    velocityY = 0;
+    snakeBody = [];
+    score = 0;
+    placeFood();
+}
 function update(){
     if (gameOver) {
+        restartGame();
         return;
     }
 
