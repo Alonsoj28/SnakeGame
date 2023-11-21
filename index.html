@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>SNAKE</title>
+  <title>Snake Game</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,6 +12,8 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-bg.css">
+    <link rel="icon" href="icon.png">
+    <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"></script>
     
     
     
@@ -307,10 +309,12 @@
                   <i class="fa-solid fa-gamepad"></i> Login
                 </a>
             </div>
+            <button class="sound" onclick="changeMusic()"><i class="fa-solid fa-volume-high"></i></button>
+            
         </div>
-        <div class="play-board"></div>
-
+        <canvas id="board"></canvas>
     </div>
+    
 
   </main>
   <footer>

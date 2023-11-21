@@ -33,13 +33,13 @@ body{
 }
 
 .wrapper{
-    width: 65vmin;
-    height: 70vmin;
+    width: 67.6vmin;
+    height: 80vmin;
     display: flex;
     overflow: hidden;
     flex-direction: column;
     border-radius: 5px;
-    background: rgb(82, 82, 82);
+    background: rgb(83, 80, 80);
 }
 
 .game-details{
@@ -50,14 +50,6 @@ body{
     justify-content: space-between;
 }
 
-.play-board{
-    width: 100%;
-    height: 100%;
-    background: black;
-    display: grid;
-    grid-template: repeat(30, 1fr)/ repeat(30, 1fr);
-
-}
 .navbar{
     background: transparent !important;
     text-align: center;
@@ -222,17 +214,36 @@ label {
 
 
 .scoreLabel {
-    background-image: linear-gradient(to right, #485563 0%, #29323c  51%, #485563  100%);
+    background: linear-gradient(to right, rgb(59, 57, 57), rgb(59, 57, 57));
     margin: 10px;
-    padding: 10px 15px;
+    padding: 15px 20px;
     text-align: center;
     text-transform: uppercase;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
-    border-radius: 10px;
-    display: block;
+    color: white;
+    border-radius: 25px;
+    display: inline-block;
+    font-weight: bold;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s, transform 0.3s;
+  }
+  
+  .scoreLabel:hover {
+    transform: scale(1.05);
+  }
+  
+
+
+  button.sound {
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
   }
 
+
+  button.sound i {
+    font-size: 24px;
+    color: #ffffff; 
+  }
 
  
