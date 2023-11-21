@@ -76,6 +76,8 @@ function restartGame() {
     velocityY = 0;
     snakeBody = [];
     score = 0;
+    let scoreLabel = document.querySelector(".scoreLabel");
+    scoreLabel.textContent = "Score: " + score;
     placeFood();
 }
 function update(){
