@@ -54,19 +54,19 @@ var foodY = blockSize * 10;
 
 var gameOver;
 
-window.onload = function(){
+window.onload = function() {
     board = document.getElementById("board");
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d");
-    // Easy = 1.4, Normal = 1.0, Hard = 0.7
     dificulty = 0.7;
 
     placeFood();
     document.addEventListener("keyup", changeDirection);
-    //update();
-    setInterval(update, (1000/10) * dificulty); // Se actualiza el juego cada 100 milisegundos.
+    restartGame(); // Iniciar el juego al cargar la ventana
+    setInterval(update, (1000 / 10) * dificulty);
 }
+
 // Función para reiniciar el juego
 function restartGame() {
     gameOver = false;
@@ -83,7 +83,6 @@ function update(){
         restartGame();
         return;
     }
-
 
     movable = true;
     let currentSquare = 0;
@@ -162,7 +161,7 @@ function update(){
 }
 
 function changeDirection(event){
-    if (!movable) return;
+    if (gameOver || !movable) return;
     if (event.code == 'ArrowUp' && velocityY != 1){
         movable = false
         if (velocityY != -1 && musicStatus == 1)  sfx.move.play();
