@@ -67,6 +67,19 @@ window.onload = function() {
     setInterval(update, (1000 / 10) * dificulty);
 }
 
+document.getElementById('easyButton').addEventListener('click', function() {
+    dificulty = 1.5;
+});
+
+document.getElementById('mediumButton').addEventListener('click', function() {
+    dificulty = 1;
+});
+
+document.getElementById('hardButton').addEventListener('click', function() {
+    dificulty = 0.7;
+});
+
+
 // Función para reiniciar el juego
 function restartGame() {
     gameOver = false;
