@@ -77,8 +77,8 @@ window.onload = function(){
 }
 
 function startGame(){
-    let gameWrapper = document.getElementById("gameWrapper");
-    gameWrapper.style.zIndex = 2;
+    let menu = document.getElementById("difficultyScreen");
+    menu.style.display = 'none';
     document.addEventListener("keyup", changeDirection);
     // Easy = 1.0, Normal = 0.7, Hard = 0.5
     let difficultySpeeds = [1.0, 0.8, 0.6];
@@ -86,6 +86,23 @@ function startGame(){
     setInterval(update, (1000/10) * dificulty); // Se actualiza el juego cada 100 milisegundos.
     gameStarted = 1;
 }
+
+// Función para reiniciar el juego
+function restartGame() {
+    let gameoverScreen = document.getElementById("gameOver");
+    gameoverScreen.style.display = 'none';
+    let scoreLabel = document.querySelector(".scoreLabel");
+    scoreLabel.textContent = "Score: 0";
+    gameOver = false;
+    snakeX = blockSize * 5;
+    snakeY = blockSize * 5;
+    velocityX = 0;
+    velocityY = 0;
+    snakeBody = [];
+    score = 0;
+    placeFood();
+}
+
 
 function update(){
     if (gameOver) {
@@ -146,6 +163,10 @@ function update(){
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
+        let gameoverScreen = document.getElementById("gameOver");
+        let endScore = document.getElementById("finalScore");
+        endScore.innerHTML = "Max score: " + score;
+        gameoverScreen.style.display = '';
     }
 
     // Chocar con su propio cuerpo.
@@ -153,6 +174,10 @@ function update(){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
             if (musicStatus == 1) sfx.death.play();
+            let gameoverScreen = document.getElementById("gameOver");
+            let endScore = document.getElementById("finalScore");
+            endScore.innerHTML = "Max score: " + score;
+            gameoverScreen.style.display = '';
         }
     }
 

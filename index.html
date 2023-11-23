@@ -41,13 +41,13 @@
         <button onclick="startGame()" class="startBtn" id="startBtn">Start Game</button>
       </div>
 
-      <div  id="gameOver" style="position: absolute; top: 30vh; " class="card" >
+      <div id="gameOver" style="position: absolute; top: 30vh; display: none;" class="card" >
         <div class="gradient-bg"></div>
         <h1 class="welcomeTag">GAME OVER!</h1>
-        <h2 class="finalScore">Max score: </h2>
+        <h2 id="finalScore" class="finalScore">Max score: </h2>
       
         <button onclick="restartGame()" class="startBtn" id="startBtn">Play again?</button>
-        <button class="gameRegister">Login to save your score</button>
+        <button class="gameRegister" data-bs-toggle="modal" data-bs-target="#login">Login to save your score</button>
       </div>
 
 
