@@ -77,8 +77,8 @@ window.onload = function(){
 }
 
 function startGame(){
-    let menu = document.getElementById("difficultyScreen");
-    menu.style.display = 'none';
+    let gameWrapper = document.getElementById("gameWrapper");
+    gameWrapper.style.zIndex = 2;
     document.addEventListener("keyup", changeDirection);
     // Easy = 1.0, Normal = 0.7, Hard = 0.5
     let difficultySpeeds = [1.0, 0.8, 0.6];
@@ -146,7 +146,6 @@ function update(){
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
-        alert("Game Over!!");
     }
 
     // Chocar con su propio cuerpo.
@@ -154,7 +153,6 @@ function update(){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
             if (musicStatus == 1) sfx.death.play();
-            alert("Game Over!!");
         }
     }
 

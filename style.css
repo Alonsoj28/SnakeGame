@@ -101,8 +101,8 @@ body{
 }
 
 .wrapper{
-    width: 67.6vmin;
-    height: 80vmin;
+    width: 70vmin;
+    height: 70vmin;
     display: flex;
     overflow: hidden;
     position: relative;
@@ -391,4 +391,48 @@ label {
     box-shadow: #ff2d75 -2px -2px 0px 2px, #4fc3dc 0px 0px 0px 4px, rgba(0, 0, 0, 0.05) 0px 0px 2px 7px;
     transform: scale(1.01);
     color: #ffffff;
+}
+
+.finalScore {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    color: #525252;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 15px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+
+  .gameRegister{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    outline: 0;
+    grid-gap: 8px;
+    font-weight: bold;
+    align-items: center;
+    background-color: #525252;
+    color: #252424;
+    border: 1px solid #000;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-flex;
+    flex-shrink: 0;
+    font-size: 16px;
+    gap: 8px;
+    justify-content: center;
+    line-height: 1.5;
+    overflow: hidden;
+    padding: 12px 16px;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: all .14s ease-out;
+    white-space: nowrap;
+  }
+
+  .gameRegister:hover {
+    box-shadow: 4px 4px 0 #4fc3dc;
+    color: white;
+    transform: translate(-4px,-4px);
+}
+.gameRegister:focus-visible{
+    outline-offset: 1px;
 }
