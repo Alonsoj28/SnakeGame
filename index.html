@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-bg.css">
     <link rel="icon" href="icon.png">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"></script>
     
     
@@ -20,6 +21,22 @@
 </head>
 
 <body>
+  <div class="modal fade" id="gameOverModal" tabindex="-1" role="dialog" aria-labelledby="gameOverModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gameOverModalLabel">Game Over</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h2 class="text-warning">Your Score: <span id="finalScore">0</span></h2>
+                    <button id="restartButton" class="btn btn-primary" onclick="restartGameFromGameOver()">Restart</button>
+                    <button id="saveButton" class="btn btn-success" onclick="saveGame()">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div style="position: fixed; z-index: -100; top: 0; left: 0; width: 100vw; height: 100%;" class="bubbles-container">
         <div class="bubbles">
             <span style="--i:16;"></span>
@@ -253,57 +270,41 @@
 
   <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 320px;">
-        <div class="modal-content text-center">
-            <div class="modal-header">
-                <h5 class="modal-title" id="registerModalTitle">Registrarse</h5>
-                <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-user-astronaut"></i></span>
-                        <input type="text" class="form-control" placeholder="Nombre de usuario">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
-                        <input type="email" class="form-control" placeholder="Correo electrónico">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></i></span>
-                        <input type="password" class="form-control" placeholder="Contraseña">
-                    </div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></i></span>
-                        <input type="password" class="form-control" placeholder="Confirmar contraseña">
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
-            </div>
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="registerModalTitle">Registrarse</h5>
+          <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
-</div>
-
-<div class="modal fade" id="dificulty" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalTitleId">Select Difficulty</h5>
-                <button style="background-color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-body">
+          <!-- Formulario de registro -->
+          <form id="registerForm">
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-solid fa-user-astronaut"></i></span>
+              <input type="text" class="form-control" id="registerUsername" name="username" placeholder="Nombre de usuario" required>
             </div>
-            <div class="modal-body">
-                <div class="d-flex flex-column align-items-center">
-                    <button class="btn btn-primary mb-2 w-100" id="easyButton">Easy</button>
-                    <button class="btn btn-primary mb-2 w-100" id="mediumButton">Medium</button>
-                    <button class="btn btn-primary mb-2 w-100" id="hardButton">Hard</button>
-                </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
+              <input type="email" class="form-control" id="registerEmail" name="email" placeholder="Correo electrónico" required>
             </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></span>
+              <input type="password" class="form-control" id="registerPassword" name="password" placeholder="Contraseña" required>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></span>
+              <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña" required>
+            </div>
+            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
+          </form>
+          <!-- Fin del formulario de registro -->
         </div>
+        <div class="modal-footer justify-content-center">
+          <!-- Mensaje de éxito o error (puedes manejar esto en el script) -->
+          <div id="registerMessage"></div>
+        </div>
+      </div>
     </div>
-</div>
-
-
+  </div>
 
     <!-- Optional: Place to the bottom of scripts -->
     <script>
@@ -329,16 +330,16 @@
                   <i class="fa-solid fa-gamepad"></i> Login
                 </a>
             </div>
+            <div id="gameOverScreen" class="game-over-screen">
+              <h2>Game Over</h2>
+              <p>Your Score: <span id="finalScore">0</span></p>
+              <button id="restartButton" onclick="restartGameFromGameOver()">Restart</button>
+              <button id="saveButton">Guardar</button>
+          </div>
             <button class="sound" onclick="changeMusic()"><i class="fa-solid fa-volume-high"></i></button>
             
         </div>
         <canvas id="board"></canvas>
-        
-    </div>
-    <div class="icon">
-        <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#dificulty">
-            <i class="fa-solid fa-chart-simple"></i> Difficulty
-        </a>
     </div>
     
 
@@ -356,6 +357,130 @@
   </script>
   <script src="https://kit.fontawesome.com/b7cf6ad869.js" crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <script>
+    $(document).ready(function () {
+      // Hacer una solicitud al servidor para obtener las puntuaciones
+      $.get("/api/scores", function (data) {
+        // Limpiar la lista actual
+        $(".list-group").empty();
+  
+        // Recorrer las puntuaciones y agregarlas a la lista
+        data.forEach(function (player, index) {
+          const listItem = `<li class="list-group-item d-flex justify-content-between align-items-center">
+                              <span>${index + 1}</span>
+                              <span>${player.username}</span>
+                              <span class="badge rounded-pill custom-badge">${player.score}</span>
+                            </li>`;
+          $(".list-group").append(listItem);
+        });
+      });
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#registerForm").submit(function (event) {
+        event.preventDefault();
+  
+        const username = $("#registerUsername").val();
+        const email = $("#registerEmail").val();
+        const password = $("#registerPassword").val();
+        const confirmPassword = $("#confirmPassword").val();
+  
+        // Verificar si las contraseñas coinciden
+        if (password !== confirmPassword) {
+          $("#registerMessage").html('<div class="alert alert-danger" role="alert">Las contraseñas no coinciden</div>');
+          return;
+        }
+  
+        // Hacer una solicitud al servidor para registrar al nuevo jugador
+        $.post("/api/register", { username, email, password }, function (data) {
+          // Mostrar mensaje de éxito
+          $("#registerMessage").html('<div class="alert alert-success" role="alert">' + data.message + '</div>');
+  
+          // Cerrar modal de registro después de un breve retraso (opcional)
+          setTimeout(function () {
+            $("#register").modal("hide");
+          }, 2000);
+        }).fail(function (error) {
+          // Manejar errores de registro
+          $("#registerMessage").html('<div class="alert alert-danger" role="alert">' + error.responseJSON.error + '</div>');
+        });
+      });
+  
+      // Al abrir el modal de registro, limpiar los campos del formulario y los mensajes
+      $("#register").on("show.bs.modal", function () {
+        $("#registerForm")[0].reset();
+        $("#registerMessage").html('');
+      });
+  
+      // Al hacer clic en el enlace dentro del modal de Login, abrir el modal de Registro
+      $(".register").click(function () {
+        $("#login").modal("hide");
+        $("#register").modal("show");
+      });
+  
+      // Otro código relacionado con el formulario de registro ...
+    });
+  </script>
+  <script>
+    $(document).ready(function () {
+      $("#registerForm").submit(function (event) {
+        event.preventDefault();
+  
+        const username = $("#registerUsername").val();
+        const email = $("#registerEmail").val();
+        const password = $("#registerPassword").val();
+        const confirmPassword = $("#confirmPassword").val();
+  
+        // Verificar si las contraseñas coinciden
+        if (password !== confirmPassword) {
+          alert("Las contraseñas no coinciden");
+          return;
+        }
+  
+        // Hacer una solicitud al servidor para registrar al nuevo jugador
+        $.post("/api/register", { username, email, password }, function (data) {
+          // Mostrar mensaje de éxito
+          alert(data.message);
+  
+          // Cerrar modal de registro después de un breve retraso (opcional)
+          setTimeout(function () {
+            $("#register").modal("hide");
+          }, 2000);
+        }).fail(function (error) {
+          // Manejar errores de registro
+          alert(error.responseJSON.error);
+        });
+      });
+  
+      // Al abrir el modal de registro, limpiar los campos del formulario y los mensajes
+      $("#register").on("show.bs.modal", function () {
+        $("#registerForm")[0].reset();
+      });
+  
+      // Al hacer clic en el enlace dentro del modal de Login, abrir el modal de Registro
+      $(".register").click(function () {
+        $("#login").modal("hide");
+        $("#register").modal("show");
+      });
+    });
+  </script>
+<script>
+  // Esta función se ejecutará cuando se haga clic en el botón de guardar
+  document.getElementById('saveButton').addEventListener('click', function () {
+      // Obtener los datos de inicio de sesión (puedes ajustar esto según tu estructura)
+      var username = document.getElementById('email').value;
+      var password = document.getElementById('password').value;
+
+      // Aquí puedes realizar la lógica para guardar los datos, por ejemplo, enviarlos al servidor
+      console.log('Guardando datos:', { username, password });
+      // Agrega tu lógica de guardado aquí
+
+      // Abrir el modal de login
+      var loginModal = new bootstrap.Modal(document.getElementById('login'));
+      loginModal.show();
+  });
+</script>
 </body>
 
 </html>

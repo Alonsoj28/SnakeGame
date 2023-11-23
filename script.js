@@ -1,5 +1,4 @@
 // Variables para el sonido
-
 var sfx = {
     move: new Howl({
         src: ['/MoveSnake.mp3'],
@@ -53,6 +52,7 @@ var foodX = blockSize * 10;
 var foodY = blockSize * 10;
 
 var gameOver;
+var gameOverScreen;
 
 window.onload = function() {
     board = document.getElementById("board");
@@ -60,6 +60,7 @@ window.onload = function() {
     board.width = cols * blockSize;
     context = board.getContext("2d");
     dificulty = 0.7;
+    gameOverScreen = document.getElementById("gameOverScreen");
 
     placeFood();
     document.addEventListener("keyup", changeDirection);
@@ -67,21 +68,11 @@ window.onload = function() {
     setInterval(update, (1000 / 10) * dificulty);
 }
 
-document.getElementById('easyButton').addEventListener('click', function() {
-    dificulty = 1.5;
-});
-
-document.getElementById('mediumButton').addEventListener('click', function() {
-    dificulty = 1;
-});
-
-document.getElementById('hardButton').addEventListener('click', function() {
-    dificulty = 0.7;
-});
-
-
 // Función para reiniciar el juego
 function restartGame() {
+    // Oculta la pantalla de Game Over
+    gameOverScreen.style.display = "none";
+
     gameOver = false;
     snakeX = blockSize * 5;
     snakeY = blockSize * 5;
@@ -93,9 +84,10 @@ function restartGame() {
 }
 function update(){
     if (gameOver) {
-        restartGame();
+        showGameOverScreen();
         return;
     }
+    
 
     movable = true;
     let currentSquare = 0;
@@ -151,7 +143,7 @@ function update(){
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
-        alert("Game Over!!");
+        //alert("Game Over!!");
     }
 
     // Chocar con su propio cuerpo.
@@ -159,7 +151,7 @@ function update(){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
             if (musicStatus == 1) sfx.death.play();
-            alert("Game Over!!");
+            //alert("Game Over!!");
         }
     }
 
@@ -171,6 +163,22 @@ function update(){
 
     
 
+}
+function endGame() {
+    gameOver = true;
+    if (musicStatus == 1) sfx.death.play();
+    
+    // Mostrar la pantalla de "Game Over" y actualizar la puntuación final
+    document.getElementById("gameOverScreen").style.display = "block";
+    document.getElementById("finalScore").textContent = score;
+}
+function showGameOverScreen() {
+    // Configura el contenido de la pantalla de Game Over
+    var finalScoreElement = document.getElementById("finalScore");
+    finalScoreElement.textContent = score;
+
+    // Muestra la pantalla de Game Over
+    gameOverScreen.style.display = "block";
 }
 
 function changeDirection(event){
@@ -199,6 +207,13 @@ function changeDirection(event){
     }
 }
 
+function restartGameFromGameOver() {
+    // Oculta la pantalla de Game Over
+    gameOverScreen.style.display = "none";
+
+    // Reinicia el juego
+    restartGame();
+}
 function placeFood(){
     foodX = Math.floor(Math.random() * cols) * blockSize;
     foodY = Math.floor(Math.random() * rows) * blockSize;
