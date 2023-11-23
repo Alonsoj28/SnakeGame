@@ -1,3 +1,17 @@
+
+// Variables antes de iniciar el juego
+//Empieza en modo normal por default
+var selected_difficulty = 1;
+
+function changeDifficulty(level){
+    selected_difficulty = level;
+    console.log(selected_difficulty);
+}
+
+var gameStarted = 0;
+var scoreValues = [10, 15, 20];
+
+
 // Variables para el sonido
 
 var sfx = {
@@ -59,13 +73,18 @@ window.onload = function(){
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d");
-    // Easy = 1.4, Normal = 1.0, Hard = 0.7
-    dificulty = 0.7;
+    update();
+}
 
-    placeFood();
+function startGame(){
+    let menu = document.getElementById("difficultyScreen");
+    menu.style.display = 'none';
     document.addEventListener("keyup", changeDirection);
-    //update();
+    // Easy = 1.0, Normal = 0.7, Hard = 0.5
+    let difficultySpeeds = [1.0, 0.8, 0.6];
+    dificulty = difficultySpeeds[selected_difficulty];
     setInterval(update, (1000/10) * dificulty); // Se actualiza el juego cada 100 milisegundos.
+    gameStarted = 1;
 }
 
 function update(){
@@ -99,7 +118,7 @@ function update(){
     if(snakeX == foodX && snakeY == foodY){
         snakeBody.push([foodX, foodY]);
         if (musicStatus == 1) sfx.food.play();
-        score += 10;
+        score += scoreValues[selected_difficulty];
         let scoreLabel = document.querySelector(".scoreLabel");
         scoreLabel.textContent = "Score: " + score;
         placeFood();
@@ -193,3 +212,4 @@ function changeMusic(){
     }
 
     }
+

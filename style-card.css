@@ -1,0 +1,143 @@
+@property --gradient-angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+  
+  :root {
+    /*
+    --clr-1: #052b2f;
+    --clr-2: #073438;
+    --clr-3: #0e4b50;
+    --clr-4: #2d8f85;
+    --clr-5: #637c54;
+    */
+    --clr-1: #252424;
+    --clr-2: #ff2d7544;
+    --clr-3: #4fc3dc44;
+    --clr-4: #ff2d75;
+    --clr-5: #4fc3dc;
+  }
+  
+  body {
+    background: black;
+    min-height: 100vh;
+    display: grid;
+    place-content: center;
+  }
+  
+  .card {
+    height: 60vh;
+    aspect-ratio: 1 / 1.5;
+    background: var(--clr-1);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    position: relative;
+    display: grid;
+    place-items: center; 
+  }
+  
+  
+  .card::before,
+  .card::after {
+    content: "";
+    position: absolute;
+    inset: -0.5rem;
+    z-index: -1;
+    background: conic-gradient(
+      from var(--gradient-angle),
+      var(--clr-3),
+      var(--clr-4),
+      var(--clr-5),
+      var(--clr-4),
+      var(--clr-3)
+    );
+    border-radius: inherit;
+    animation: rotation 2s linear infinite;
+  }
+  
+  .card::after {
+    filter: blur(3.5rem);
+  }
+  
+  @keyframes rotation {
+    0% {
+      --gradient-angle: 0deg;
+    }
+    100% {
+      --gradient-angle: 360deg;
+    }
+  }
+  
+
+  .difficulty-options {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  
+  label {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
+    color: white;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  label:hover {
+    background-color: #f0f0f0;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  input[type="radio"]:checked + label {
+    background-color: #ff2d7544;
+    color: white;
+    border: 1px solid #ff2d75;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    background-color: #3498db;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+
+  .welcomeTag {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 3rem;
+    color: #525252;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+
+  .difficultyTag {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    color: #525252;
+    text-align: center;
+    letter-spacing: 1px;
+    margin-bottom: 15px; 
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  }
