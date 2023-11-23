@@ -11,6 +11,8 @@ function changeDifficulty(level){
 var gameStarted = 0;
 var scoreValues = [10, 15, 20];
 
+var currentGame;
+
 
 // Variables para el sonido
 
@@ -48,7 +50,7 @@ var rows = 20;
 var cols = 20;
 var board;
 var context;
-var dificulty;
+var difficulty;
 
 // Variables de Snake
 var snakeX = blockSize * 5;
@@ -73,6 +75,7 @@ window.onload = function(){
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d");
+    placeFood();
     update();
 }
 
@@ -81,9 +84,9 @@ function startGame(){
     menu.style.display = 'none';
     document.addEventListener("keyup", changeDirection);
     // Easy = 1.0, Normal = 0.7, Hard = 0.5
-    let difficultySpeeds = [1.0, 0.8, 0.6];
-    dificulty = difficultySpeeds[selected_difficulty];
-    setInterval(update, (1000/10) * dificulty); // Se actualiza el juego cada 100 milisegundos.
+    var difficultySpeeds = [1.0, 0.8, 0.6];
+    difficulty = difficultySpeeds[selected_difficulty];
+    currentGame = setInterval(update, (1000/10) * difficulty); // Se actualiza el juego cada 100 milisegundos.
     gameStarted = 1;
 }
 
@@ -93,6 +96,8 @@ function restartGame() {
     gameoverScreen.style.display = 'none';
     let scoreLabel = document.querySelector(".scoreLabel");
     scoreLabel.textContent = "Score: 0";
+    var difficultySpeeds = [1.0, 0.8, 0.6];
+    difficulty = difficultySpeeds[selected_difficulty];
     gameOver = false;
     snakeX = blockSize * 5;
     snakeY = blockSize * 5;
@@ -101,6 +106,9 @@ function restartGame() {
     snakeBody = [];
     score = 0;
     placeFood();
+    clearInterval(currentGame);
+    console.log(difficulty);
+    currentGame = setInterval(update, (1000/10) * difficulty);
 }
 
 
@@ -163,6 +171,13 @@ function update(){
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
+        if (selected_difficulty === 0){
+            document.getElementById("easy-end").checked = true
+        }else if(selected_difficulty === 1){
+            document.getElementById("normal-end").checked = true
+        }else{
+            document.getElementById("hard-end").checked = true
+        }
         let gameoverScreen = document.getElementById("gameOver");
         let endScore = document.getElementById("finalScore");
         endScore.innerHTML = "Max score: " + score;
@@ -174,6 +189,13 @@ function update(){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
             if (musicStatus == 1) sfx.death.play();
+            if (selected_difficulty === 0){
+                document.getElementById("easy-end").checked = true
+            }else if(selected_difficulty === 1){
+                document.getElementById("normal-end").checked = true
+            }else{
+                document.getElementById("hard-end").checked = true
+            }     
             let gameoverScreen = document.getElementById("gameOver");
             let endScore = document.getElementById("finalScore");
             endScore.innerHTML = "Max score: " + score;

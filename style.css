@@ -403,6 +403,15 @@ label {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
   }
 
+  .changeDifficulty {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 2rem;
+    color: #a8a8a8;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+  }
+
   .gameRegister{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     outline: 0;

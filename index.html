@@ -45,6 +45,18 @@
         <div class="gradient-bg"></div>
         <h1 class="welcomeTag">GAME OVER!</h1>
         <h2 id="finalScore" class="finalScore">Max score: </h2>
+        <h5 class="changeDifficulty">Change difficulty? </h2>
+
+        <div class="difficulty-options">
+            <input onclick="changeDifficulty(0)" class="difficultyOption" type="radio" id="easy-end" name="difficulty" value="easy">
+            <label class="difficultyTag" for="easy-end">Easy</label>
+        
+            <input onclick="changeDifficulty(1)" class="difficultyOption" type="radio" id="normal-end" name="difficulty" value="normal">
+            <label class="difficultyTag" for="normal-end">Normal</label>
+        
+            <input onclick="changeDifficulty(2)" class="difficultyOption" type="radio" id="hard-end" name="difficulty" value="hard">
+            <label class="difficultyTag" for="hard-end">Hard</label>
+        </div>
       
         <button onclick="restartGame()" class="startBtn" id="startBtn">Play again?</button>
         <button class="gameRegister" data-bs-toggle="modal" data-bs-target="#login">Login to save your score</button>
