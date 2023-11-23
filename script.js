@@ -92,7 +92,6 @@ function update(){
         return;
     }
 
-
     movable = true;
     let currentSquare = 0;
     for (let i = 0; i < cols; i++) {
@@ -196,8 +195,25 @@ function changeDirection(event){
 }
 
 function placeFood(){
-    foodX = Math.floor(Math.random() * cols) * blockSize;
-    foodY = Math.floor(Math.random() * rows) * blockSize;
+    let testX = Math.floor(Math.random() * cols) * blockSize;
+    let testY = Math.floor(Math.random() * rows) * blockSize;
+    let noCollision = false; let cleanPlace = true;
+    while (!noCollision){
+        for(let i = 0; i < snakeBody.length; i++){
+            if (testX == snakeBody[i][0] && testY == snakeBody[i][1]){
+                cleanPlace = false;
+            }
+        }
+        if(cleanPlace) noCollision = true
+        else{
+            cleanPlace = true
+            console.log("detected food collision @ (" + testX + " ," + testY + "), changing places");
+            testX = Math.floor(Math.random() * cols) * blockSize;
+            testY = Math.floor(Math.random() * rows) * blockSize;
+        } 
+    }
+    foodX = testX;
+    foodY = testY;
 }
 
 function changeMusic(){
