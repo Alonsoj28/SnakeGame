@@ -78,6 +78,8 @@ function restartGame() {
     score = 0;
     placeFood();
 }
+
+
 function update(){
     if (gameOver) {
         restartGame();
