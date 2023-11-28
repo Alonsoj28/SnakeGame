@@ -3,6 +3,10 @@ const path = require('path');
 const router = express();
 
 router.use(express.json());
+router.use(express.static(path.join(__dirname, 'Proyecto_DASW')));
+router.use('/views', express.static(path.join(__dirname, 'views')));
+router.use('/controllers', express.static(path.join(__dirname, 'controllers')));
+
 
 /*
 const UserRouter = require('../routes/users');

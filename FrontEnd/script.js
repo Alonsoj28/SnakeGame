@@ -1,21 +1,21 @@
 // Variables para el sonido
 var sfx = {
     move: new Howl({
-        src: ['/MoveSnake.mp3'],
+        src: ['/views/MoveSnake.mp3'],
         volume: 0.4
     }),
     food: new Howl({
-        src: ['/FoodSound.mp3'],
+        src: ['/views/FoodSound.mp3'],
         volume: 0.6
     }),
     death: new Howl({
-        src: ['/DeathSound.mp3']
+        src: ['/views/DeathSound.mp3']
     })
 }
 
 var music = {
     bg: new Howl({
-        src: ['/Bg-music.mp3'],
+        src: ['/views/Bg-music.mp3'],
         loop: true,
         autoplay: true,
         volume: 0.60
