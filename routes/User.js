@@ -40,6 +40,16 @@ router.get('/user_score', (req, res) => {
   res.json(userGameHistory);
 });
 
+router.get('/:id', (req, res) => {
+  const username = req.params.id;
+
+  if (!username) {
+      return res.status(400).json({ error: 'El parámetro "username" es requerido para obtener la información del usuario' });
+  }
+
+  const user = dataHandler.getUserByUsername(username);
+  res.json(user);
+});
 
 
 module.exports = router;
