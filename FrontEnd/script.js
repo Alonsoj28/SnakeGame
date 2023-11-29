@@ -113,7 +113,7 @@ window.onload = function(){
 function startGame(){
     let menu = document.getElementById("difficultyScreen");
     menu.style.display = 'none';
-    document.addEventListener("keyup", changeDirection);
+    document.addEventListener("keydown", changeDirection);
     // Easy = 1.3, Normal = 1.0, Hard = 0.6
     difficultySpeeds = [1.3, 1.0, 0.6];
     difficulty = difficultySpeeds[selected_difficulty];
@@ -257,24 +257,27 @@ function update(){
 
 function changeDirection(event){
     if (!movable) return;
-    keyPressed = 1;
     if (event.code == 'ArrowUp' && velocityY != 1){
+        keyPressed = 1;
         movable = false
         if (velocityY != -1 && musicStatus == 1)  sfx.move.play();
         velocityX = 0;
         velocityY = -1;
         
     }else if (event.code == 'ArrowDown' && velocityY != -1){
+        keyPressed = 1;
         movable = false
         if (velocityY != 1 && musicStatus == 1) sfx.move.play();
         velocityX = 0;
         velocityY = 1;
     }else if (event.code == 'ArrowLeft' && velocityX != 1){
+        keyPressed = 1;
         movable = false
         if (velocityX != -1 && musicStatus == 1) sfx.move.play();
         velocityX = -1;
         velocityY = 0;
     }else if (event.code == 'ArrowRight' && velocityX != -1){
+        keyPressed = 1;
         movable = false
         if (velocityX != 1 && musicStatus == 1) sfx.move.play();
         velocityX = 1;
