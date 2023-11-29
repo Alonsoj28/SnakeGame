@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 
 const dataFilePathUsers = path.join(__dirname, '../data/users.json');
-const dataFilePathScores = path.join(__dirname, '../data/scores.json'); 
+const dataFilePathScores = path.join(__dirname, '../data/scoreboeard.json'); 
 
 let userList = loadUsers();
 let scoreList = loadScores();
@@ -76,6 +76,11 @@ function getUserByUsername(username){
         return user.username === username;
     });
 }
+function getUserByEmail(email){
+    return userList.find(function (user){
+        return user.email === email;
+    });
+}
 
 function addScore(username, score) {
     const user = getUserByUsername(username);
@@ -99,6 +104,11 @@ function getUserGameHistory(username) {
     const gameHistory = user.gameHistory.sort((a, b) => b[1] - a[1]); // Ordena el historial por puntuación de mayor a menor
     return gameHistory;
 }
+
+loadUsers()
+console.table(userList);
+console.log(getUserByUsername("user1"));
+
 
 module.exports = {
     registerUser: registerUser,
