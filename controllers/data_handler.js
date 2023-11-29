@@ -61,6 +61,12 @@ function register_user(username, password, email){
     saveUsers();
 }
 
+function getUserByUsername(username){
+    return userList.find(function (user){
+        return user.username === username;
+    });
+}
+
 module.exports = {
     userList,
     scoreList,
