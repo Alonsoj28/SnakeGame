@@ -65,7 +65,8 @@ var snakeBody = [];
 var movable = false;
 var score = 0;
 var bodyGradient;
-var headGradient
+var headGradient;
+var difficultySpeeds;
 
 // Variables de comida
 var foodX = blockSize * 10;
@@ -113,10 +114,10 @@ function startGame(){
     let menu = document.getElementById("difficultyScreen");
     menu.style.display = 'none';
     document.addEventListener("keyup", changeDirection);
-    // Easy = 1.0, Normal = 0.7, Hard = 0.5
-    var difficultySpeeds = [1.0, 0.8, 0.6];
+    // Easy = 1.3, Normal = 1.0, Hard = 0.6
+    difficultySpeeds = [1.3, 1.0, 0.6];
     difficulty = difficultySpeeds[selected_difficulty];
-    currentGame = setInterval(update, (1000/10) * difficulty); // Se actualiza el juego cada 100 milisegundos.
+    currentGame = setInterval(update, (1000/10) * difficulty); // Se actualiza el juego cada 100 milisegundos en modo normal.
     gameStarted = 1;
 }
 
@@ -126,7 +127,6 @@ function restartGame() {
     gameoverScreen.style.display = 'none';
     let scoreLabel = document.querySelector(".scoreLabel");
     scoreLabel.textContent = "Score: 0";
-    var difficultySpeeds = [1.0, 0.8, 0.6];
     difficulty = difficultySpeeds[selected_difficulty];
     gameOver = false;
     snakeX = blockSize * 5;

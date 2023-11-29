@@ -137,7 +137,7 @@ body{
 .nav-link {
     background-image: linear-gradient(to right, #9D50BB 0%, #6E48AA  51%, #9D50BB  100%);
     margin: 10px;
-    padding: 5px 10px;
+    padding: 15px 20px;
     text-align: center;
     text-transform: uppercase;
     transition: 0.5s;
@@ -285,7 +285,7 @@ label {
 .scoreLabel {
     background: linear-gradient(to right, rgb(59, 57, 57), rgb(59, 57, 57));
     margin: 10px;
-    padding: 5px 15px;
+    padding: 15px 20px;
     text-align: center;
     text-transform: uppercase;
     color: white;
@@ -368,7 +368,7 @@ label {
     text-align: center;
     text-transform: uppercase;
     letter-spacing: 2px;
-    font-size: 40px;
+    font-size: 50px;
     margin-bottom: 20px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
   }
@@ -413,7 +413,7 @@ label {
     text-align: center;
     letter-spacing: 1px;
     margin-bottom: 15px;
-    font-size: 25px;
+    font-size: 35px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
   }
 
@@ -423,7 +423,7 @@ label {
     color: #a8a8a8;
     text-align: center;
     letter-spacing: 1px;
-    font-size: 20px;
+    font-size: 30px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
   }
 
