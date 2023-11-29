@@ -89,10 +89,21 @@ function addScore(username, score) {
 
     return { success: 'Puntuación registrada exitosamente' };
 }
+function getUserGameHistory(username) {
+    const user = getUserByUsername(username);
+
+    if (!user) {
+        return { error: 'Usuario no encontrado' };
+    }
+
+    const gameHistory = user.gameHistory.sort((a, b) => b[1] - a[1]); // Ordena el historial por puntuación de mayor a menor
+    return gameHistory;
+}
 
 module.exports = {
     registerUser: registerUser,
     getUserByUsername: getUserByUsername,
     highScores: highScores,
+    getUserGameHistory: getUserGameHistory,
     addScore: addScore
 };
