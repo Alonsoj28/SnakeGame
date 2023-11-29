@@ -1,4 +1,21 @@
+
+// Variables antes de iniciar el juego
+//Empieza en modo normal por default
+var selected_difficulty = 1;
+
+function changeDifficulty(level){
+    selected_difficulty = level;
+    console.log(selected_difficulty);
+}
+
+var gameStarted = 0;
+var scoreValues = [10, 15, 20];
+
+var currentGame;
+
+
 // Variables para el sonido
+
 var sfx = {
     move: new Howl({
         src: ['/views/MoveSnake.mp3'],
@@ -25,13 +42,15 @@ var music = {
 // Variable para apagar y prender la musica.
 var musicStatus = 1;
 
+
+
 // Variables del tablero
 var blockSize = 25;
 var rows = 20;
 var cols = 20;
 var board;
 var context;
-var dificulty;
+var difficulty;
 
 // Variables de Snake
 var snakeX = blockSize * 5;
@@ -51,21 +70,34 @@ var foodY = blockSize * 10;
 
 var gameOver;
 
-window.onload = function() {
+window.onload = function(){
     board = document.getElementById("board");
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d");
-    dificulty = 0.7;
-
     placeFood();
+    update();
+}
+
+function startGame(){
+    let menu = document.getElementById("difficultyScreen");
+    menu.style.display = 'none';
     document.addEventListener("keyup", changeDirection);
-    restartGame(); // Iniciar el juego al cargar la ventana
-    setInterval(update, (1000 / 10) * dificulty);
+    // Easy = 1.0, Normal = 0.7, Hard = 0.5
+    var difficultySpeeds = [1.0, 0.8, 0.6];
+    difficulty = difficultySpeeds[selected_difficulty];
+    currentGame = setInterval(update, (1000/10) * difficulty); // Se actualiza el juego cada 100 milisegundos.
+    gameStarted = 1;
 }
 
 // Función para reiniciar el juego
 function restartGame() {
+    let gameoverScreen = document.getElementById("gameOver");
+    gameoverScreen.style.display = 'none';
+    let scoreLabel = document.querySelector(".scoreLabel");
+    scoreLabel.textContent = "Score: 0";
+    var difficultySpeeds = [1.0, 0.8, 0.6];
+    difficulty = difficultySpeeds[selected_difficulty];
     gameOver = false;
     snakeX = blockSize * 5;
     snakeY = blockSize * 5;
@@ -73,16 +105,18 @@ function restartGame() {
     velocityY = 0;
     snakeBody = [];
     score = 0;
-    let scoreLabel = document.querySelector(".scoreLabel");
-    scoreLabel.textContent = "Score: " + score;
     placeFood();
+    clearInterval(currentGame);
+    console.log(difficulty);
+    currentGame = setInterval(update, (1000/10) * difficulty);
 }
+
 
 function update(){
     if (gameOver) {
-        restartGame();
         return;
     }
+
     movable = true;
     let currentSquare = 0;
     for (let i = 0; i < cols; i++) {
@@ -108,7 +142,7 @@ function update(){
     if(snakeX == foodX && snakeY == foodY){
         snakeBody.push([foodX, foodY]);
         if (musicStatus == 1) sfx.food.play();
-        score += 10;
+        score += scoreValues[selected_difficulty];
         let scoreLabel = document.querySelector(".scoreLabel");
         scoreLabel.textContent = "Score: " + score;
         placeFood();
@@ -130,29 +164,57 @@ function update(){
     context.fillStyle = gradient;
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
+
     // Condiciones para terminar el juego.
+
     // Salirse del tablero
     if (snakeX < 0 || snakeX > cols*blockSize-1 || snakeY < 0 || snakeY > rows*blockSize-1){
         gameOver = true;
         if (musicStatus == 1) sfx.death.play();
-        alert("Game Over!!");
+        if (selected_difficulty === 0){
+            document.getElementById("easy-end").checked = true
+        }else if(selected_difficulty === 1){
+            document.getElementById("normal-end").checked = true
+        }else{
+            document.getElementById("hard-end").checked = true
+        }
+        let gameoverScreen = document.getElementById("gameOver");
+        let endScore = document.getElementById("finalScore");
+        endScore.innerHTML = "Max score: " + score;
+        gameoverScreen.style.display = '';
     }
+
     // Chocar con su propio cuerpo.
     for(let i = 0; i < snakeBody.length; i++){
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
             gameOver = true;
             if (musicStatus == 1) sfx.death.play();
-            alert("Game Over!!");
+            if (selected_difficulty === 0){
+                document.getElementById("easy-end").checked = true
+            }else if(selected_difficulty === 1){
+                document.getElementById("normal-end").checked = true
+            }else{
+                document.getElementById("hard-end").checked = true
+            }     
+            let gameoverScreen = document.getElementById("gameOver");
+            let endScore = document.getElementById("finalScore");
+            endScore.innerHTML = "Max score: " + score;
+            gameoverScreen.style.display = '';
         }
     }
+
+
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
     for (let i = 0; i < snakeBody.length; i++){
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
+
+    
+
 }
 
 function changeDirection(event){
-    if (gameOver || !movable) return;
+    if (!movable) return;
     if (event.code == 'ArrowUp' && velocityY != 1){
         movable = false
         if (velocityY != -1 && musicStatus == 1)  sfx.move.play();
@@ -178,8 +240,25 @@ function changeDirection(event){
 }
 
 function placeFood(){
-    foodX = Math.floor(Math.random() * cols) * blockSize;
-    foodY = Math.floor(Math.random() * rows) * blockSize;
+    let testX = Math.floor(Math.random() * cols) * blockSize;
+    let testY = Math.floor(Math.random() * rows) * blockSize;
+    let noCollision = false; let cleanPlace = true;
+    while (!noCollision){
+        for(let i = 0; i < snakeBody.length; i++){
+            if (testX == snakeBody[i][0] && testY == snakeBody[i][1]){
+                cleanPlace = false;
+            }
+        }
+        if(cleanPlace) noCollision = true
+        else{
+            cleanPlace = true
+            console.log("detected food collision @ (" + testX + " ," + testY + "), changing places");
+            testX = Math.floor(Math.random() * cols) * blockSize;
+            testY = Math.floor(Math.random() * rows) * blockSize;
+        } 
+    }
+    foodX = testX;
+    foodY = testY;
 }
 
 function changeMusic(){

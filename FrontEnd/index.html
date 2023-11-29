@@ -20,6 +20,49 @@
 </head>
 
 <body>
+
+
+    <div  id="difficultyScreen" style="position: absolute; top: 30vh; " class="card" >
+        <div class="gradient-bg"></div>
+        <h1 class="welcomeTag">Welcome!</h1>
+        <h2 class="difficultySelector">Select difficulty:</h2>
+
+        <div class="difficulty-options">
+          <input onclick="changeDifficulty(0)" class="difficultyOption" type="radio" id="easy" name="difficulty" value="easy">
+          <label class="difficultyTag" for="easy">Easy</label>
+      
+          <input onclick="changeDifficulty(1)" class="difficultyOption" type="radio" id="normal" name="difficulty" value="normal" checked>
+          <label class="difficultyTag" for="normal">Normal</label>
+      
+          <input onclick="changeDifficulty(2)" class="difficultyOption" type="radio" id="hard" name="difficulty" value="hard">
+          <label class="difficultyTag" for="hard">Hard</label>
+        </div>
+      
+        <button onclick="startGame()" class="startBtn" id="startBtn">Start Game</button>
+      </div>
+
+      <div id="gameOver" style="position: absolute; top: 30vh; display: none;" class="card" >
+        <div class="gradient-bg"></div>
+        <h1 class="deathTag">GAME OVER!</h1>
+        <h2 id="finalScore" class="finalScore">Max score: </h2>
+        <h5 class="changeDifficulty">Change difficulty? </h2>
+
+        <div class="difficulty-options">
+            <input onclick="changeDifficulty(0)" class="difficultyOption" type="radio" id="easy-end" name="difficulty" value="easy">
+            <label class="difficultyTag" for="easy-end">Easy</label>
+        
+            <input onclick="changeDifficulty(1)" class="difficultyOption" type="radio" id="normal-end" name="difficulty" value="normal">
+            <label class="difficultyTag" for="normal-end">Normal</label>
+        
+            <input onclick="changeDifficulty(2)" class="difficultyOption" type="radio" id="hard-end" name="difficulty" value="hard">
+            <label class="difficultyTag" for="hard-end">Hard</label>
+        </div>
+      
+        <button onclick="restartGame()" class="startBtn mb-3" id="startBtn">Play again?</button>
+        <button class="gameRegister mb-3" data-bs-toggle="modal" data-bs-target="#login">Login to save your score</button>
+      </div>
+
+
     <div style="position: fixed; z-index: -100; top: 0; left: 0; width: 100vw; height: 100%;" class="bubbles-container">
         <div class="bubbles">
             <span style="--i:16;"></span>
@@ -286,14 +329,10 @@
 </div>
     
     <!-- Optional: Place to the bottom of scripts -->
-    <script>
-    
-    </script>
   </header>
   
   <main>
-    <h1 style="text-align: center;" class="game-title">Snake</h1>
-    <div class="wrapper">
+    <div id="gameNavbar" class="wrapper" style="height: 17vmin; justify-content: center;">
         <div class="game-details">
             <div class="icon">
                 <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#scoreboard">
@@ -309,9 +348,11 @@
                 </a>
             </div>
             <button class="sound" onclick="changeMusic()"><i class="fa-solid fa-volume-high"></i></button>
-            
         </div>
-        <canvas id="board"></canvas>
+    </div>
+    <div id="gameWrapper" class="wrapper"  style="z-index: -2;">
+        
+        <canvas id="board" ></canvas>
     </div>
     
 
