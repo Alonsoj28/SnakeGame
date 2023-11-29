@@ -44,6 +44,11 @@ function saveScores() {
     }
 }
 
+function getHighScores()
+{
+    return scoreList;
+}
+
 function highScores(score, username) {
     // Añade la puntuación y el usuario a la lista de highscores
     scoreList.push({ score, username });
@@ -115,5 +120,6 @@ module.exports = {
     getUserByUsername: getUserByUsername,
     highScores: highScores,
     getUserGameHistory: getUserGameHistory,
-    addScore: addScore
+    addScore: addScore,
+    getHighScores: getHighScores
 };
