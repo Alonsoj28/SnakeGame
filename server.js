@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 
 // Importa el router que configuraste en router.js
-const router = require('./controllers/router.js');
+const router = require('../controllers/router.js');
 
 const app = express();
 const port = 3000;
