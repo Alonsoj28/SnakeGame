@@ -3,7 +3,7 @@ const router = express.Router();
 const dataHandler = require('../controllers/data_handler');
 
 // Get ScoreBoard
-router.get('/score', (req, res) => {
+router.get('/highScores', (req, res) => {
     const highScores = dataHandler.getHighScores();
     res.json(highScores);
 });
