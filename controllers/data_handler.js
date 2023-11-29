@@ -52,13 +52,23 @@ function highScores(score, username) {
     // Mantén solo los primeros 10 highscores
     scoreList = scoreList.slice(0, 10);
     saveScores(); // Guarda los cambios en el archivo scores.json
-    return true;
+    return scoreList;
+
 }
 
-function register_user(username, password, email){
-    const newUser = new User(username, password, email)
+function registerUser(username, password, email) {
+    // Verificar si el usuario o el email ya existen
+    const existingUser = getUserByUsername(username);
+    const existingEmail = getUserByEmail(email);
+
+    if (existingUser || existingEmail) {
+        return { error: 'El username o email ya están en uso' };
+    }
+
+    const newUser = new User(username, password, email);
     userList.push(newUser);
     saveUsers();
+    return { success: 'Usuario registrado exitosamente' };
 }
 
 function getUserByUsername(username){
@@ -67,12 +77,22 @@ function getUserByUsername(username){
     });
 }
 
+function addScore(username, score) {
+    const user = getUserByUsername(username);
+
+    if (!user) {
+        return { error: 'Usuario no encontrado' };
+    }
+
+    user.addToGameHistory(new Date().toISOString(), score);
+    saveUsers();
+
+    return { success: 'Puntuación registrada exitosamente' };
+}
+
 module.exports = {
-    userList,
-    scoreList,
-    loadUsers,
-    saveUsers,
-    loadScores,
-    saveScores,
-    highScores
+    registerUser: registerUser,
+    getUserByUsername: getUserByUsername,
+    highScores: highScores,
+    addScore: addScore
 };

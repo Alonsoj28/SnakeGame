@@ -63,6 +63,10 @@ class User {
         return value;
     }
 
+    addToGameHistory(gameDate, score) {
+        this.gameHistory.push([gameDate, score]);
+    }
+
     setPassword(password) {
         this.password = this.validateString(password); // Idealmente, el hash de la contraseña debería realizarse aquí
     }
