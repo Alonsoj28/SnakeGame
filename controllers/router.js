@@ -8,7 +8,7 @@ router.use('/views', express.static(path.join(__dirname, 'views')));
 router.use('/controllers', express.static(path.join(__dirname, 'controllers')));
 
 
-const UserRouter = require('../routes/users');
+const UserRouter = require('../routes/Users');
 
 
 router.use(express.static('public', { 'extensions': ['js'] }));
