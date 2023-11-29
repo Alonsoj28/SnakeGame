@@ -9,6 +9,7 @@ function changeDifficulty(level){
 }
 
 var gameStarted = 0;
+var keyPressed = 0;
 var scoreValues = [10, 15, 20];
 
 var currentGame;
@@ -63,6 +64,8 @@ var snakeBody = [];
 
 var movable = false;
 var score = 0;
+var bodyGradient;
+var headGradient
 
 // Variables de comida
 var foodX = blockSize * 10;
@@ -75,6 +78,33 @@ window.onload = function(){
     board.height = rows * blockSize;
     board.width = cols * blockSize;
     context = board.getContext("2d");
+    bodyGradient = context.createLinearGradient(0, 0, cols * blockSize, rows * blockSize);
+    bodyGradient.addColorStop(0.20, "rgba(255,45,117,1)");
+    bodyGradient.addColorStop(0.47, "rgba(131,35,68,1)");
+    bodyGradient.addColorStop(0.59, "rgba(33,81,91,1)");
+    bodyGradient.addColorStop(0.85, "rgba(79,195,220,1)");
+
+    headGradient = context.createLinearGradient(0, 0, cols * blockSize, rows * blockSize);
+    headGradient.addColorStop(0.1, "rgba(182, 149, 192, 1)"); 
+    headGradient.addColorStop(0.5, "rgba(123, 65, 168, 1)");   
+    headGradient.addColorStop(0.9, "rgba(53, 0, 92, 1)");   
+
+    /*
+
+    Color alternativo, creo que se ve demasiado llamativo
+
+    headGradient = context.createLinearGradient(0, 0, cols * blockSize, rows * blockSize);
+    headGradient.addColorStop(0.9, "rgba(255, 0, 0, 1)");   
+    headGradient.addColorStop(0.6, "rgba(255, 255, 0, 1)"); 
+    headGradient.addColorStop(0.3, "rgba(0, 255, 0, 1)"); 
+    headGradient.addColorStop(0.1, "rgba(0, 0, 255, 1)"); 
+    */
+    
+    for (let i = 0; i < 3; i++) {
+        snakeBody.push([snakeX - i * blockSize, snakeY]);
+    }
+    snakeX = snakeBody[0][0];
+    snakeY = snakeBody[0][1];
     placeFood();
     update();
 }
@@ -105,6 +135,13 @@ function restartGame() {
     velocityY = 0;
     snakeBody = [];
     score = 0;
+    for (let i = 0; i < 3; i++) {
+        snakeBody.push([snakeX - i * blockSize, snakeY]);
+    }
+    snakeX = snakeBody[0][0];
+    snakeY = snakeBody[0][1];
+    gameStarted = 1;
+    keyPressed = 0;
     placeFood();
     clearInterval(currentGame);
     console.log(difficulty);
@@ -155,13 +192,6 @@ function update(){
         snakeBody[0] = [snakeX, snakeY];
     }
     
-    var gradient = context.createLinearGradient(0, 0, cols * blockSize, rows * blockSize);
-    gradient.addColorStop(0.20, "rgba(255,45,117,1)");
-    gradient.addColorStop(0.47, "rgba(131,35,68,1)");
-    gradient.addColorStop(0.59, "rgba(33,81,91,1)");
-    gradient.addColorStop(0.85, "rgba(79,195,220,1)");
-
-    context.fillStyle = gradient;
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
 
@@ -181,30 +211,42 @@ function update(){
         let gameoverScreen = document.getElementById("gameOver");
         let endScore = document.getElementById("finalScore");
         endScore.innerHTML = "Max score: " + score;
+        gameStarted = 0;
+        keyPressed = 0;
         gameoverScreen.style.display = '';
     }
 
     // Chocar con su propio cuerpo.
-    for(let i = 0; i < snakeBody.length; i++){
-        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
-            gameOver = true;
-            if (musicStatus == 1) sfx.death.play();
-            if (selected_difficulty === 0){
-                document.getElementById("easy-end").checked = true
-            }else if(selected_difficulty === 1){
-                document.getElementById("normal-end").checked = true
-            }else{
-                document.getElementById("hard-end").checked = true
-            }     
-            let gameoverScreen = document.getElementById("gameOver");
-            let endScore = document.getElementById("finalScore");
-            endScore.innerHTML = "Max score: " + score;
-            gameoverScreen.style.display = '';
+    if (gameStarted == 1 && keyPressed == 1){
+        for(let i = 0; i < snakeBody.length; i++){
+            if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]){
+                gameOver = true;
+                if (musicStatus == 1) sfx.death.play();
+                if (selected_difficulty === 0){
+                    document.getElementById("easy-end").checked = true
+                }else if(selected_difficulty === 1){
+                    document.getElementById("normal-end").checked = true
+                }else{
+                    document.getElementById("hard-end").checked = true
+                }     
+                let gameoverScreen = document.getElementById("gameOver");
+                let endScore = document.getElementById("finalScore");
+                endScore.innerHTML = "Max score: " + score;
+                gameStarted = 0;
+                keyPressed = 0;
+                gameoverScreen.style.display = '';
+            }
         }
     }
+    
 
 
+    // Llenar cabeza
+    context.fillStyle = headGradient;
     context.fillRect(snakeX, snakeY, blockSize, blockSize);
+
+    // Llenar resto del cuerpo
+    context.fillStyle = bodyGradient;
     for (let i = 0; i < snakeBody.length; i++){
         context.fillRect(snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
@@ -215,6 +257,7 @@ function update(){
 
 function changeDirection(event){
     if (!movable) return;
+    keyPressed = 1;
     if (event.code == 'ArrowUp' && velocityY != 1){
         movable = false
         if (velocityY != -1 && musicStatus == 1)  sfx.move.play();
