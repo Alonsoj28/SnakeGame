@@ -23,7 +23,6 @@ router.post('/score', (req, res) => {
     if (!username) {
         return res.status(400).json({ error: 'El campo "username" es requerido para registrar la puntuación' });
     }
-    dataHandler.highScores(score, username)
     const result = dataHandler.addScore(username, score);
     res.json(result);
 });
