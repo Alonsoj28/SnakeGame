@@ -12,11 +12,7 @@
     integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style-bg.css">
-    <link rel="icon" href="icon.png">
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"></script>
-    
-    
+    <link rel="icon" href="icon.png">    
     
 </head>
 
@@ -257,7 +253,7 @@
                           </div>
                       </div>
                       <div class="d-flex justify-content-center">
-                          <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
+                          <button type="button" class="btn btn-primary" onclick="$('#loginForm').submit()"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
                       </div>
                   </form>
               </div>
@@ -294,7 +290,7 @@
               <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></span>
               <input type="password" class="form-control" id="confirmPassword" placeholder="Confirmar contraseña" required>
             </div>
-            <button type="submit" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
+            <button type="submit" class="btn btn-primary" onclick="handleRegistration()"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
           </form>
           <!-- Fin del formulario de registro -->
         </div>
@@ -307,10 +303,6 @@
   </div>
 
     <!-- Optional: Place to the bottom of scripts -->
-    <script>
-        const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-    
-    </script>
   </header>
   
   <main>
@@ -348,6 +340,8 @@
     <!-- place footer here -->
   </footer>
   <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script type="text/JavaScript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.4/howler.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
@@ -357,6 +351,7 @@
   </script>
   <script src="https://kit.fontawesome.com/b7cf6ad869.js" crossorigin="anonymous"></script>
   <script src="script.js"></script>
+  <script src="server.js"></script>
   <script>
     $(document).ready(function () {
       // Hacer una solicitud al servidor para obtener las puntuaciones
@@ -376,111 +371,6 @@
       });
     });
   </script>
-  <script>
-    $(document).ready(function () {
-      $("#registerForm").submit(function (event) {
-        event.preventDefault();
-  
-        const username = $("#registerUsername").val();
-        const email = $("#registerEmail").val();
-        const password = $("#registerPassword").val();
-        const confirmPassword = $("#confirmPassword").val();
-  
-        // Verificar si las contraseñas coinciden
-        if (password !== confirmPassword) {
-          $("#registerMessage").html('<div class="alert alert-danger" role="alert">Las contraseñas no coinciden</div>');
-          return;
-        }
-  
-        // Hacer una solicitud al servidor para registrar al nuevo jugador
-        $.post("/api/register", { username, email, password }, function (data) {
-          // Mostrar mensaje de éxito
-          $("#registerMessage").html('<div class="alert alert-success" role="alert">' + data.message + '</div>');
-  
-          // Cerrar modal de registro después de un breve retraso (opcional)
-          setTimeout(function () {
-            $("#register").modal("hide");
-          }, 2000);
-        }).fail(function (error) {
-          // Manejar errores de registro
-          $("#registerMessage").html('<div class="alert alert-danger" role="alert">' + error.responseJSON.error + '</div>');
-        });
-      });
-  
-      // Al abrir el modal de registro, limpiar los campos del formulario y los mensajes
-      $("#register").on("show.bs.modal", function () {
-        $("#registerForm")[0].reset();
-        $("#registerMessage").html('');
-      });
-  
-      // Al hacer clic en el enlace dentro del modal de Login, abrir el modal de Registro
-      $(".register").click(function () {
-        $("#login").modal("hide");
-        $("#register").modal("show");
-      });
-  
-      // Otro código relacionado con el formulario de registro ...
-    });
-  </script>
-  <script>
-    $(document).ready(function () {
-      $("#registerForm").submit(function (event) {
-        event.preventDefault();
-  
-        const username = $("#registerUsername").val();
-        const email = $("#registerEmail").val();
-        const password = $("#registerPassword").val();
-        const confirmPassword = $("#confirmPassword").val();
-  
-        // Verificar si las contraseñas coinciden
-        if (password !== confirmPassword) {
-          alert("Las contraseñas no coinciden");
-          return;
-        }
-  
-        // Hacer una solicitud al servidor para registrar al nuevo jugador
-        $.post("/api/register", { username, email, password }, function (data) {
-          // Mostrar mensaje de éxito
-          alert(data.message);
-  
-          // Cerrar modal de registro después de un breve retraso (opcional)
-          setTimeout(function () {
-            $("#register").modal("hide");
-          }, 2000);
-        }).fail(function (error) {
-          // Manejar errores de registro
-          alert(error.responseJSON.error);
-        });
-      });
-  
-      // Al abrir el modal de registro, limpiar los campos del formulario y los mensajes
-      $("#register").on("show.bs.modal", function () {
-        $("#registerForm")[0].reset();
-      });
-  
-      // Al hacer clic en el enlace dentro del modal de Login, abrir el modal de Registro
-      $(".register").click(function () {
-        $("#login").modal("hide");
-        $("#register").modal("show");
-      });
-    });
-  </script>
-<script>
-  // Esta función se ejecutará cuando se haga clic en el botón de guardar
-  document.getElementById('saveButton').addEventListener('click', function () {
-      // Obtener los datos de inicio de sesión (puedes ajustar esto según tu estructura)
-      var username = document.getElementById('email').value;
-      var password = document.getElementById('password').value;
-
-      // Aquí puedes realizar la lógica para guardar los datos, por ejemplo, enviarlos al servidor
-      console.log('Guardando datos:', { username, password });
-      // Agrega tu lógica de guardado aquí
-
-      // Abrir el modal de login
-      var loginModal = new bootstrap.Modal(document.getElementById('login'));
-      loginModal.show();
-  });
-</script>
 </body>
 
 </html>

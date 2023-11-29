@@ -1,4 +1,5 @@
 // Variables para el sonido
+
 var sfx = {
     move: new Howl({
         src: ['/MoveSnake.mp3'],
