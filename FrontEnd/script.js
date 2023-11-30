@@ -364,6 +364,10 @@ function login () {
     }
 
 function logout(){
+
+    userLoggedIn = false;
+    storedUsername = null;
+
     var btnUser = document.getElementById("LoginName");
     btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + "Login";
     btnUser.setAttribute("data-bs-target", "#login"); 
