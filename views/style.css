@@ -492,7 +492,7 @@ label {
 @media only screen and (max-width: 1500px) {
   .nav-link {
     padding: 10px 15px;
-    font-size: 20px;
+    font-size: 18px;
   }
   
   .deathTag {
@@ -510,7 +510,7 @@ label {
   .register{
     padding: 5px 8px;
     font-size: 15px;
-  }
+  } 
 }
 
 .logoutTag{
