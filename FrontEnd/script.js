@@ -349,9 +349,10 @@ function changeMusic(){
 
     }
 
-function login() {
-    var loginUsername = document.getElementById("email").value;
-    var loginPassword = document.getElementById("password").value;
+function login(gotUser, gotPass) {
+    // Si se recibe un usuario y contraseña, se usa para iniciar sesión automáticamente
+    var loginUsername = gotUser || document.getElementById("email").value;
+    var loginPassword = gotPass ||  document.getElementById("password").value;
     if (loginUsername == "" || loginPassword == ""){
         return;
     }
@@ -429,10 +430,16 @@ function login() {
             document.getElementById("registerPassword").value = "";
             document.getElementById("confirmPassword").value = "";
             document.getElementById("registerEmail").value = "";
-            if (xhr.status != 200){
+            console.log(xhr.status);
+            if (xhr.status == 400){
                 alert("Username or email already in use");
                 return;
             }
+            let btnClose = document.getElementById("closeRegister");
+            if (btnClose != null){
+                btnClose.click();
+            }
+            login(registerUsername, registerPassword);
         }
     }
 

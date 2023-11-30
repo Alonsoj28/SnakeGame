@@ -18,7 +18,7 @@ router.post('/user', (req, res) => {
     dataHandler.registerUser(username, password, email).then((result) => {
         console.log("Volvio de register");
         console.log(result);
-        if (result === 'Usuario registrado exitosamente') {
+        if (result === true) {
             return res.send(result);
         }else{
             res.status(400).send('El username o email ya están en uso');

@@ -10,19 +10,18 @@ async function registerUser(username, password, email) {
         console.log(existingUser);
         if (existingUser) {
             console.log("User already exists");
-            return "El username o email ya están en uso";
+            return false;
         }
         console.log("Creating new user");
         const newUser = { username, password, email, gameHistory: []};
         console.log(newUser);
         const user = UserModel(newUser);
         console.log(user);
-        user.save().then(() => {
-            console.log("User saved");
-            return 'Usuario registrado exitosamente';
-        });
+        const savedUser = await user.save().then(() => {return true;});
+        console.log("User saved!");
+        return savedUser ? true : false;
     } catch (error) {
-        return 'Error al registrar el usuario en la base de datos';
+        return false;
     }
 }
 
