@@ -4,18 +4,23 @@ const path = require('path');
 const UserModel = require('../models/User');
 const TopScoresModel = require('../models/User');
 
-
-
 async function registerUser(username, password, email) {
+    console.log("Async registering user");
     try {
-        const existingUser = await UserModel.findOne({ $or: [{ username }, { email }] });
+        const existingUser = await UserModel.findOne({ $or: [{ username }, { email }]});
+        console.log(existingUser);
         if (existingUser) {
             return { error: 'El username o email ya están en uso' };
         }
 
-        const newUser = new UserModel({ username, password, email });
-        await newUser.save();
-        return { success: 'Usuario registrado exitosamente' };
+        const newUser = { username, password, email };
+        console.log(newUser);
+        const user = UserModel(newUser);
+        console.log(user);
+        user.save().then(() => {
+            console.log("User saved");
+            return { success: 'Usuario registrado exitosamente' };
+        });
     } catch (error) {
         return { error: 'Error al registrar el usuario en la base de datos' };
     }
@@ -35,20 +40,6 @@ async function getHighScores() {
 }
 
 
-function registerUser(username, password, email) {
-    // Verificar si el usuario o el email ya existen
-    const existingUser = getUserByUsername(username);
-    const existingEmail = getUserByEmail(email);
-
-    if (existingUser || existingEmail) {
-        return { error: 'El username o email ya están en uso' };
-    }
-
-    const newUser = new User(username, password, email);
-    userList.push(newUser);
-    saveUsers();
-    return { success: 'Usuario registrado exitosamente' };
-}
 
 
 async function getUserByUsername(username) {

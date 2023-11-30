@@ -6,7 +6,7 @@ POST http://localhost:3000/snake/user
 Content-Type: application/json
 
 {
-  "username": "user1",
+  "username": "6666",
   "password": "password1",
-  "email": "user1@example.com"
+  "email": "asdawd@gmail.com"
 }

@@ -10,7 +10,9 @@ router.get('/highScores', (req, res) => {
 
 // Post New User
 router.post('/user', (req, res) => {
+    console.log("Posting user");
     const { username, password, email } = req.body;
+    console.log(username, password, email);
     const result = dataHandler.registerUser(username, password, email);
     res.json(result);
 });
