@@ -487,3 +487,22 @@ label {
   border: 1px solid #4fc3dc44;
 
 }
+
+@media only screen and (max-width: 1500px) {
+  .nav-link {
+    padding: 10px 15px;
+    font-size: 20px;
+  }
+  
+  .deathTag {
+    font-size: 40px;
+  }
+
+  .finalScore {
+    font-size: 30px;
+  }
+
+  .changeDifficulty{
+    font-size: 20px;
+  }
+}

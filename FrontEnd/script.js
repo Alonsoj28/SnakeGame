@@ -375,6 +375,12 @@ function login() {
     }
 
     function checkSession(){
+
+        let btnClose = document.getElementById("closeLogin");
+            if (btnClose != null){
+                btnClose.click();
+            }
+
         if (userLoggedIn){
             var loginElements = document.querySelectorAll(".logged");
             loginElements.forEach(function(element) {
@@ -385,6 +391,8 @@ function login() {
             var btnUser = document.getElementById("LoginName");
             btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + session.getItem("user");
             btnUser.setAttribute("data-bs-target", "#Logout");
+
+            
 
             if (score != 0){
                 let xhr = new XMLHttpRequest();
@@ -430,6 +438,7 @@ function login() {
 
 function logout(){
     userLoggedIn = false;
+    score = 0;
     session.clear();
 
     var btnUser = document.getElementById("LoginName");
