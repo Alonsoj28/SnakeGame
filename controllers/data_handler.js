@@ -10,19 +10,20 @@ async function registerUser(username, password, email) {
         const existingUser = await UserModel.findOne({ $or: [{ username }, { email }]});
         console.log(existingUser);
         if (existingUser) {
-            return { error: 'El username o email ya están en uso' };
+            console.log("User already exists");
+            return "El username o email ya están en uso";
         }
-
+        console.log("Creating new user");
         const newUser = { username, password, email };
         console.log(newUser);
         const user = UserModel(newUser);
         console.log(user);
         user.save().then(() => {
             console.log("User saved");
-            return { success: 'Usuario registrado exitosamente' };
+            return 'Usuario registrado exitosamente';
         });
     } catch (error) {
-        return { error: 'Error al registrar el usuario en la base de datos' };
+        return 'Error al registrar el usuario en la base de datos';
     }
 }
 

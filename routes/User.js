@@ -13,8 +13,11 @@ router.post('/user', (req, res) => {
     console.log("Posting user");
     const { username, password, email } = req.body;
     console.log(username, password, email);
-    const result = dataHandler.registerUser(username, password, email);
-    res.json(result);
+    dataHandler.registerUser(username, password, email).then((result) => {
+        console.log("Volvio de register");
+        console.log(result);
+        res.send(result);
+    });
 });
 
 // Post New Score
