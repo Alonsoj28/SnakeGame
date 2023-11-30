@@ -488,7 +488,7 @@ function loadPersonalScores(){
                 newScore.appendChild(spanDate);
             
                 let spanScore = document.createElement("span");
-                spanScore.classList.add("badge", "rounded-pill", "custom-badge");
+                spanScore.classList.add("badge", "rounded-pill", "personal-badge");
                 spanScore.textContent = scores[i].score;
                 newScore.appendChild(spanScore);
             

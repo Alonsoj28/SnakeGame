@@ -466,6 +466,7 @@ label {
 }
 
 .pagination a {
+  font-family: 'Courier New', Courier, monospace; 
   color: black;
   float: left;
   padding: 8px 16px;
@@ -505,4 +506,31 @@ label {
   .changeDifficulty{
     font-size: 20px;
   }
+
+  .register{
+    padding: 5px 8px;
+    font-size: 15px;
+  }
+}
+
+.logoutTag{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 2rem;
+  color: #525252;
+  text-align: center;
+  letter-spacing: 1px;
+  font-size: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.personal-badge{
+  max-width: 140px;
+  height: 30px;
+  font-weight: bold; 
+  font-size: 0.8rem;
+  margin: 0; 
+  display: flex;
+  background: linear-gradient(90deg, rgba(169,45,255,1) 11%, rgba(91,33,91,1) 48%, rgba(220,79,219,1) 93%);
+  justify-content: center; 
+  align-items: center; 
 }
