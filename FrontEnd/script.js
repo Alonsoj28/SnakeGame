@@ -1,4 +1,3 @@
-
 // Variables antes de iniciar el juego
 //Empieza en modo normal por default
 var selected_difficulty = 1;
@@ -75,6 +74,7 @@ var foodY = blockSize * 10;
 var gameOver;
 
 window.onload = function(){
+    loadHighScores();
     board = document.getElementById("board");
     board.height = rows * blockSize;
     board.width = cols * blockSize;
@@ -320,4 +320,79 @@ function changeMusic(){
 
 function findHighScores(){
     //Hacer un get de usuarios con sus scores, ver que que lugar quedo el score actual. Si es mayor al ultimo Agregar Score con el usuario
+}
+
+function loadHighScores(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/snake/highScores');
+
+    xhr.onload = function(){
+        let data = xhr.response;
+        let scores = JSON.parse(data);
+        console.log(scores);
+        let scoreList = document.getElementById("leaderboardScores");
+        scoreList.innerHTML = "";
+        let newScore = document.createElement("li");
+        newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+
+        let spanRank = document.createElement("span");
+        spanRank.classList.add("fw-bold");
+        spanRank.textContent = "Rank";
+        newScore.appendChild(spanRank);
+
+        let spanPlayer = document.createElement("span");
+        spanPlayer.classList.add("fw-bold");
+        spanPlayer.textContent = "Player";
+        newScore.appendChild(spanPlayer);
+
+        let spanScore = document.createElement("span");
+        spanScore.classList.add("fw-bold");
+        spanScore.textContent = "Score";
+        newScore.appendChild(spanScore);
+
+        scoreList.appendChild(newScore);
+
+        for (let i = 0; i < scores.length; i++) {
+            if (i === 0){
+                let newScore = document.createElement("li");
+                newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            
+                let spanRank = document.createElement("span");
+                spanRank.innerHTML = '<i class="fa-solid fa-crown"></i>'; // Corona para el No.1 
+                newScore.appendChild(spanRank);
+            
+                let spanPlayer = document.createElement("span");
+                spanPlayer.textContent = scores[i].username; 
+                newScore.appendChild(spanPlayer);
+            
+                let spanScore = document.createElement("span");
+                spanScore.classList.add("badge", "rounded-pill", "first-place-badge"); // Badge para el No.1
+                spanScore.textContent = scores[i].score; 
+                newScore.appendChild(spanScore);
+            
+                scoreList.appendChild(newScore);
+                continue;
+            }
+
+            let newScore = document.createElement("li");
+            newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        
+            let spanRank = document.createElement("span");
+            spanRank.textContent = i + 1; 
+            newScore.appendChild(spanRank);
+        
+            let spanPlayer = document.createElement("span");
+            spanPlayer.textContent = scores[i].username;
+            newScore.appendChild(spanPlayer);
+        
+            let spanScore = document.createElement("span");
+            spanScore.classList.add("badge", "rounded-pill", "custom-badge");
+            spanScore.textContent = scores[i].score;
+            newScore.appendChild(spanScore);
+        
+            scoreList.appendChild(newScore);
+        }
+    }
+    xhr.send();
+
 }

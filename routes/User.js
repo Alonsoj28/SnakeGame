@@ -6,7 +6,7 @@ const dataHandler = require('../controllers/data_handler');
 router.get('/highScores', (req, res) => {
     dataHandler.getHighScores().then((highScores) => {
         console.log(highScores);
-        res.json(highScores);
+        res.send(highScores);
     });
 });
 
