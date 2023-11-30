@@ -76,6 +76,7 @@ var foodY = blockSize * 10;
 var gameOver;
 
 window.onload = function(){
+    loadHighScores();
     checkSession();
     board = document.getElementById("board");
     board.height = rows * blockSize;
@@ -334,16 +335,12 @@ function login () {
     xhr.onload = function() {
         let user = xhr.response;
         if (user == ''){
-            console.log("Usuario no existe");
         }else {
             user = JSON.parse(user);
             if (user.username == loginUsername && user.password == loginPassword){
-                console.log("Login exitoso");
                 userLoggedIn = true;
                 storedUsername = loginUsername;
                 checkSession();
-            }else{
-                console.log("Contraseña o usuario incorrecto");
             }
         }
     }
@@ -351,13 +348,16 @@ function login () {
 
     function checkSession(){
         if (userLoggedIn){
-            var loginElements = document.querySelectorAll(".login_user");
+            var loginElements = document.querySelectorAll(".logged");
             loginElements.forEach(function(element) {
                 element.style.display = "none";
+                element.parentElement.append(element.cloneNode(true).innerHTML = '');
             });
 
             var btnUser = document.getElementById("LoginName");
-            btnUser.textContent = storedUsername;
+            btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + storedUsername;
+
+
         }
     }
 
@@ -366,11 +366,83 @@ function register(event) {
     var registerUsername = document.getElementById("registerUsername").value;
     var registerPassword = document.getElementById("registerPassword").value;
 
-    // Aquí debes realizar la lógica de registro en el servidor
-    // Por ejemplo, puedes enviar una solicitud AJAX al servidor
 
-    // Después del registro exitoso, puedes mostrar el juego
     document.getElementById("loginForm").style.display = "none";
     document.getElementById("registerForm").style.display = "none";
     board.style.display = "block";
+}
+
+
+function loadHighScores(){
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', '/snake/highScores');
+
+    xhr.onload = function(){
+        let data = xhr.response;
+        let scores = JSON.parse(data);
+        let scoreList = document.getElementById("leaderboardScores");
+        scoreList.innerHTML = "";
+        let newScore = document.createElement("li");
+        newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+
+        let spanRank = document.createElement("span");
+        spanRank.classList.add("fw-bold");
+        spanRank.textContent = "Rank";
+        newScore.appendChild(spanRank);
+
+        let spanPlayer = document.createElement("span");
+        spanPlayer.classList.add("fw-bold");
+        spanPlayer.textContent = "Player";
+        newScore.appendChild(spanPlayer);
+
+        let spanScore = document.createElement("span");
+        spanScore.classList.add("fw-bold");
+        spanScore.textContent = "Score";
+        newScore.appendChild(spanScore);
+
+        scoreList.appendChild(newScore);
+
+        for (let i = 0; i < scores.length; i++) {
+            if (i === 0){
+                let newScore = document.createElement("li");
+                newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            
+                let spanRank = document.createElement("span");
+                spanRank.innerHTML = '<i class="fa-solid fa-crown"></i>'; // Corona para el No.1 
+                newScore.appendChild(spanRank);
+            
+                let spanPlayer = document.createElement("span");
+                spanPlayer.textContent = scores[i].username; 
+                newScore.appendChild(spanPlayer);
+            
+                let spanScore = document.createElement("span");
+                spanScore.classList.add("badge", "rounded-pill", "first-place-badge"); // Badge para el No.1
+                spanScore.textContent = scores[i].score; 
+                newScore.appendChild(spanScore);
+            
+                scoreList.appendChild(newScore);
+                continue;
+            }
+
+            let newScore = document.createElement("li");
+            newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        
+            let spanRank = document.createElement("span");
+            spanRank.textContent = i + 1; 
+            newScore.appendChild(spanRank);
+        
+            let spanPlayer = document.createElement("span");
+            spanPlayer.textContent = scores[i].username;
+            newScore.appendChild(spanPlayer);
+        
+            let spanScore = document.createElement("span");
+            spanScore.classList.add("badge", "rounded-pill", "custom-badge");
+            spanScore.textContent = scores[i].score;
+            newScore.appendChild(spanScore);
+        
+            scoreList.appendChild(newScore);
+        }
+    }
+    xhr.send();
+
 }

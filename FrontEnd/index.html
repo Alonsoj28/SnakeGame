@@ -59,7 +59,7 @@
         </div>
       
         <button onclick="restartGame()" class="startBtn mb-3" id="startBtn">Play again?</button>
-        <button class="gameRegister mb-3 login_user" data-bs-toggle="modal" data-bs-target="#login" class="login_user">Login to save your score</button>
+        <button class="gameRegister mb-3" data-bs-toggle="modal" data-bs-target="#login">Login to save your score</button>
       </div>
 
 
@@ -136,134 +136,30 @@
                     <button style="background-color: white;" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body scoreboard-modal">
-                    <ul class="list-group list-group-flush">
+                    <ul class="list-group list-group-flush" id="leaderboardScores">
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <span class="fw-bold">Rank</span>
                             <span class="fw-bold">Player</span>
                             <span class="fw-bold">Score</span>
                         </li>
                         <!-- Ejemplos hardcodeados de puntuaciones de jugadores -->
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span><i class="fa-solid fa-crown"></i></span>
-                            <span>Player 1</span>
-                            <span class="badge rounded-pill first-place-badge">5000</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>2</span>
-                            <span>Player 2</span>
-                            <span class="badge rounded-pill custom-badge">4500</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>3</span>
-                            <span>Player 3</span>
-                            <span class="badge rounded-pill custom-badge">4000</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>4</span>
-                            <span>Player 4</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">3500</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>5</span>
-                            <span>Player 5</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">3000</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>6</span>
-                            <span>Player 6</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">2500</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>7</span>
-                            <span>Player 7</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">2000</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>8</i></span>
-                            <span>Player 8</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1900</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>9</span>
-                            <span>Player 9</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1800</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>10</span>
-                            <span>Player 10</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1700</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>11</span>
-                            <span>Player 11</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1600</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>12</span>
-                            <span>Player 12</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1500</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>13</span>
-                            <span>Player 13</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1400</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>14</span>
-                            <span>Player 14</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1300</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span >15</i></span>
-                            <span>Player 15</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1200</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>16</span>
-                            <span>Player 16</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1100</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>17</span>
-                            <span>Player 17</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">1000</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>18</span>
-                            <span>Player 18</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">900</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>19</span>
-                            <span>Player 19</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">800</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>20</span>
-                            <span>Player 20</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">700</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>21</span>
-                            <span>Player 21</span>
-                            <span class="badge bg-primary rounded-pill custom-badge">600</span>
-                        </li>
+                        
 
                         <!-- Aqui se añade cada jugador obtenido de la base de datos, obviamente estos son ejemplos... -->
                     </ul>
                 </div>
-                <div class="modal-footer justify-content-center" class="login_user">
+                <div class="modal-footer justify-content-center logged">
                     ¿Quieres participar?   <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">  Regístrate aquí</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true" class="login_user">
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title login_user" id="modalTitleId">Login</h5>
+                  <h5 class="modal-title" id="modalTitleId">Login</h5>
                   <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -281,18 +177,18 @@
                               <span class="input-group-text" id="password-addon" style="margin-left: auto;"><i class="fa-solid fa-dungeon"></i></span>
                           </div>
                       </div>
-                      <div class="d-flex justify-content-center login_user">
-                          <button id="LoginButtonHide" type="submit"  onclick="login()" class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
+                      <div class="d-flex justify-content-center">
+                          <button type="submit" onclick="login()" class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
                       </div>
               </div>
-              <div class="modal-footer justify-content-center">
+              <div class="modal-footer justify-content-center logged">
                   ¿No tienes cuenta? <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">Regístrate aquí</a>
               </div>
           </div>
       </div>
   </div>
 
-  <div class="modal fade login_user" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+  <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 320px;">
         <div class="modal-content text-center">
             <div class="modal-header">
@@ -319,7 +215,7 @@
                     </div>
                 </form>
             </div>
-            <div class="modal-footer justify-content-center">
+            <div class="modal-footer justify-content-center logged">
                 <button type="button" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
             </div>
         </div>
@@ -360,7 +256,7 @@
             <label class="scoreLabel">
                 Score: 0
             </label>
-            <div class="icon login_user_button">
+            <div class="icon">
                 <a id="LoginName" role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
                   <i class="fa-solid fa-gamepad"></i> Login
                 </a>
