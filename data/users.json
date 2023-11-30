@@ -1,8 +1,8 @@
 [
   {
-    "username": "user1",
+    "username": "user1Eula",
     "password": "password1",
-    "email": "user1@example.com",
+    "email": "numu@omi.org",
     "gameHistory": [
       [
         "2023-11-28T08:00:00Z",
@@ -19,9 +19,9 @@
     ]
   },
   {
-    "username": "user2",
+    "username": "user2Mark",
     "password": "password2",
-    "email": "user2@example.com",
+    "email": "heg@mizug.sc",
     "gameHistory": [
       [
         "2023-11-28T12:15:00Z",
@@ -38,9 +38,9 @@
     ]
   },
   {
-    "username": "user3",
+    "username": "user3Dustin",
     "password": "password3",
-    "email": "user3@example.com",
+    "email": "epuvigu@tit.sz",
     "gameHistory": [
       [
         "2023-11-28T17:45:00Z",
@@ -57,9 +57,9 @@
     ]
   },
   {
-    "username": "user4",
+    "username": "user4Jack",
     "password": "password4",
-    "email": "user4@example.com",
+    "email": "nahkajruk@jucko.vn",
     "gameHistory": [
       [
         "2023-11-28T09:30:00Z",
@@ -76,9 +76,9 @@
     ]
   },
   {
-    "username": "user7",
+    "username": "user7Amelia",
     "password": "password1",
-    "email": "user7@example.com",
+    "email": "havojcew@keppojno.ve",
     "gameHistory": []
   }
 ]

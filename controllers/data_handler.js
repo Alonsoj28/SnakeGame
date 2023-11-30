@@ -2,6 +2,7 @@ const User = require('../controllers/Users.js'); // Importa la clase User
 const fs = require('fs');
 const path = require('path');
 const UserModel = require('../models/User');
+const TopScoresModel = require('../models/User');
 
 
 
@@ -24,23 +25,9 @@ async function registerUser(username, password, email) {
 
 async function getHighScores() {
     try {
-        const allUsers = await UserModel.find({}, 'username gameHistory');
-        const allScores = [];
-
-        // Obtener todos los registros de puntuaciones de todos los usuarios
-        allUsers.forEach(user => {
-            user.gameHistory.forEach(score => {
-                allScores.push({
-                    username: user.username,
-                    score: score.score
-                });
-            });
-        });
-
-        // Ordenar por puntaje y tomar los 10 mejores
-        allScores.sort((a, b) => b.score - a.score);
-        const top10Scores = allScores.slice(0, 10);
-
+        console.log("Getting high scores");
+        const top10Scores = await TopScoresModel.find({});
+        console.log(top10Scores);
         return top10Scores;
     } catch (error) {
         return { error: 'Error al obtener los highScores' };
