@@ -356,10 +356,25 @@ function login () {
 
             var btnUser = document.getElementById("LoginName");
             btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + storedUsername;
+            btnUser.setAttribute("data-bs-target", "#Logout"); 
+
 
 
         }
     }
+
+function logout(){
+    var btnUser = document.getElementById("LoginName");
+    btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + "Login";
+    btnUser.setAttribute("data-bs-target", "#login"); 
+
+    var loginElements = document.querySelectorAll(".logged");
+    loginElements.forEach(function(element) {
+        element.style.display = "";
+        element.parentElement.append(element.cloneNode(true).innerHTML = '');
+    });
+}
+
 
 function register(event) {
     event.preventDefault();
