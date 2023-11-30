@@ -14,7 +14,7 @@ async function registerUser(username, password, email) {
             return "El username o email ya están en uso";
         }
         console.log("Creating new user");
-        const newUser = { username, password, email };
+        const newUser = { username, password, email, gameHistory: []};
         console.log(newUser);
         const user = UserModel(newUser);
         console.log(user);
@@ -32,11 +32,16 @@ async function registerUser(username, password, email) {
 async function getHighScores() {
     try {
         console.log("Getting high scores");
-        const top10Scores = await TopScoresModel.find({});
+        const data = await UserModel.find({ "Scores" : true });
+        const testArr = Object.values(data);
+        console.log(typeof testArr);
+        console.log(testArr);
+        const top10Scores = testArr[0].top10;
         console.log(top10Scores);
         return top10Scores;
     } catch (error) {
-        return { error: 'Error al obtener los highScores' };
+        console.log(error);
+        return 'Error al obtener los highScores';
     }
 }
 
@@ -54,14 +59,14 @@ async function addScore(username, score) {
     try {
         const user = await UserModel.findOne({ username });
         if (!user) {
-            return { error: 'Usuario no encontrado' };
+            return 'Usuario no encontrado';
         }
 
-        user.gameHistory.push({ date: new Date(), score });
+        user.gameHistory.push({ date: new Date().toString(), score });
         await user.save();
-        return { success: 'Puntuación registrada exitosamente' };
+        return 'Puntuación registrada exitosamente';
     } catch (error) {
-        return { error: 'Error al añadir la puntuación' };
+        return 'Error al añadir la puntuación';
     }
 }
 

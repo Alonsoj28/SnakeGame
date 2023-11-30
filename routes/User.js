@@ -4,8 +4,10 @@ const dataHandler = require('../controllers/data_handler');
 
 // Get ScoreBoard
 router.get('/highScores', (req, res) => {
-    const highScores = dataHandler.getHighScores();
-    res.json(highScores);
+    dataHandler.getHighScores().then((highScores) => {
+        console.log(highScores);
+        res.json(highScores);
+    });
 });
 
 // Post New User
@@ -24,12 +26,14 @@ router.post('/user', (req, res) => {
 router.post('/score', (req, res) => {
     const { username, score } = req.body;
 
-    // Verificar si se proporcionó un username en la solicitud
-    if (!username) {
-        return res.status(400).json({ error: 'El campo "username" es requerido para registrar la puntuación' });
-    }
-    const result = dataHandler.addScore(username, score);
-    res.json(result);
+    dataHandler.addScore(username, score).then((result) => {
+        console.log(result);
+        dataHandler.updateHighScores().then((result) => {
+            res.send(result);
+        });
+        
+        
+    });
 });
 
 //Get GameHistory
@@ -40,19 +44,19 @@ router.get('/user_score', (req, res) => {
       return res.status(400).json({ error: 'El parámetro "username" es requerido para obtener el historial de partidas' });
   }
 
-  const userGameHistory = dataHandler.getUserGameHistory(username);
-  res.json(userGameHistory);
+  dataHandler.getUserGameHistory(username).then((userGameHistory) => {
+        console.log(userGameHistory);
+        res.json(userGameHistory);
+  });
 });
 
-router.get('/:id', (req, res) => {
-  const username = req.params.id;
-
-  if (!username) {
-      return res.status(400).json({ error: 'El parámetro "username" es requerido para obtener la información del usuario' });
-  }
-
-  const user = dataHandler.getUserByUsername(username);
-  res.json(user);
+router.get('/user/:id', (req, res) => {
+    console.log("Getting user, id: " + req.params.id);
+    const username = req.params.id;
+    dataHandler.getUserByUsername(username).then((user) => {
+        console.log(user);
+        res.send(user);
+    });
 });
 
 

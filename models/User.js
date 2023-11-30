@@ -18,9 +18,15 @@ mongoose.connect(userData);
 
 
 const userSchema = new mongoose.Schema({
+    Scores: { type: Boolean},
+    top10: { type: Array},
     username: { type: String, required: true },
     password: { type: String, required: true },
-    email: { type: String, required: true }
+    email: { type: String, required: true },
+    gameHistory: [{
+        date: { type: String, required: true },
+        score: { type: Number, required: true },
+    }]
 });
 
 
