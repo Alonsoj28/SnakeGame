@@ -23,18 +23,25 @@ router.post('/user', (req, res) => {
 });
 
 // Post New Score
-router.post('/score', (req, res) => {
+router.post('/score', async (req, res) => {
     const { username, score } = req.body;
 
-    dataHandler.addScore(username, score).then((result) => {
-        console.log(result);
-        dataHandler.updateHighScores().then((result) => {
-            res.send(result);
-        });
+
+        dataHandler.addScore(username, score).then((result) =>{
+            console.log(result);
+            if(result = 'Error al añadir la puntuación'){
+                res.send(result)
+            }
+        })
         
-        
-    });
+       console.log("Actualizar Highscores");
+       dataHandler.updateHighScores(username, score).then((result)=>{
+            console.log(result);
+            res.send(result)
+       });
+
 });
+
 
 //Get GameHistory
 router.get('/user_score', (req, res) => {

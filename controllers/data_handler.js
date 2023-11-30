@@ -29,11 +29,20 @@ async function registerUser(username, password, email) {
 
 async function updateHighScores(username, score)
 {
+    try{
     const score = [username, score]
     console.log("Update HighScores");
     const data = await UserModel.find({ "Scores" : true });
-    data.top10.push(score)
-    data.top10.sort((a,b) => b.score - a.score)
+    data.top10.push(score);
+    data.top10.sort((a,b) => b.score - a.score);
+    data.top10.pop();
+    await data.save();
+    return "Felicidades, nuevo highscore"
+    }
+    catch{
+        console.log(error);
+        return 'Error al obtener los highScores';
+    }
 }
 
 async function getHighScores() {
