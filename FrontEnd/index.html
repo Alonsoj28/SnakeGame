@@ -145,9 +145,7 @@
                             <span class="fw-bold">Rank</span>
                             <span class="fw-bold">Player</span>
                             <span class="fw-bold">Score</span>
-                        </li>
-                        <!-- Ejemplos hardcodeados de puntuaciones de jugadores -->
-                        
+                        </li>                        
 
                         <!-- Aqui se añade cada jugador obtenido de la base de datos, obviamente estos son ejemplos... -->
                     </ul>
@@ -217,27 +215,25 @@
                 <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-user-astronaut"></i></span>
-                        <input type="text" class="form-control" placeholder="Nombre de usuario">
+                        <input id="registerUsername" type="text" class="form-control" placeholder="Nombre de usuario">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-regular fa-id-card"></i></span>
-                        <input type="email" class="form-control" placeholder="Correo electrónico">
+                        <input id="registerEmail" type="email" class="form-control" placeholder="Correo electrónico">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></i></span>
-                        <input type="password" class="form-control" placeholder="Contraseña">
+                        <input id="registerPassword" type="password" class="form-control" placeholder="Contraseña">
                     </div>
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-hashtag"></i></i></span>
-                        <input type="password" class="form-control" placeholder="Confirmar contraseña">
+                        <input id="confirmPassword" type="password" class="form-control" placeholder="Confirmar contraseña">
                     </div>
-                </form>
             </div>
             <div class="modal-footer justify-content-center logged">
-                <button type="button" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
+                <button type="button" onclick="register()" class="btn btn-primary"><i class="fa-solid fa-rocket fa-spin"></i> Registrarse</button>
             </div>
         </div>
     </div>
@@ -270,7 +266,7 @@
     <div id="gameNavbar" class="wrapper" style="height: 17vmin; justify-content: center;">
         <div class="game-details">
             <div class="icon">
-                <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#scoreboard">
+                <a onclick="updateCurrentValues()" role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#scoreboard">
                     <i class="fa-solid fa-chart-simple"></i> Scoreboard
                 </a>
             </div>

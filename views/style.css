@@ -276,7 +276,7 @@ label {
 }
 
 .scoreboard-modal {
-    max-height: 500px; 
+    max-height: 600px; 
     overflow-y: auto;
     position: relative;
 }
@@ -470,8 +470,9 @@ label {
   float: left;
   padding: 8px 16px;
   text-decoration: none;
+  background-color: #ff2d7544;
   transition: background-color .3s;
-  border: 1px solid #ddd;
+  border: 1px solid #ff2d7544;
 }
 
 .pagination a.active {
@@ -480,8 +481,9 @@ label {
   border: 1px solid #ff2d7544;
 }
 
+
 .pagination a:hover:not(.active) {
-  background-color: #4fc3dc;
+  background-color: #4fc3dc44;
   border: 1px solid #4fc3dc44;
 
 }

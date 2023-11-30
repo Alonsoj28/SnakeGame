@@ -236,8 +236,6 @@ function update(){
             xhr.onload = function() {
                 console.log(xhr.response);
             }
-            if (currentPage === 1) loadPersonalScores();
-            else loadHighScores();
         }
     }
 
@@ -268,8 +266,6 @@ function update(){
                     xhr.onload = function() {
                         console.log(xhr.response);
                     }
-                    if (currentPage === 2) loadPersonalScores();
-                    else loadHighScores();
                 }
             }
         }
@@ -353,19 +349,18 @@ function changeMusic(){
 
     }
 
-
-function findHighScores(){
-    //Hacer un get de usuarios con sus scores, ver que que lugar quedo el score actual. Si es mayor al ultimo Agregar Score con el usuario
-}
-
-
 function login () {
     var loginUsername = document.getElementById("email").value;
     var loginPassword = document.getElementById("password").value;
+    if (loginUsername == "" || loginPassword == ""){
+        return;
+    }
     let xhr = new XMLHttpRequest();
     xhr.open('get', '/snake/user/' + loginUsername);
     xhr.send();
     xhr.onload = function() {
+        document.getElementById("email").value = '';
+        document.getElementById("password").value = '';
         let user = xhr.response;
         if (user == ''){
         }else {
@@ -390,21 +385,37 @@ function login () {
             var btnUser = document.getElementById("LoginName");
             btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + session.getItem("user");
             btnUser.setAttribute("data-bs-target", "#Logout");
-            
-
         }
     }
 
-function register(event) {
-    event.preventDefault();
-    var registerUsername = document.getElementById("registerUsername").value;
-    var registerPassword = document.getElementById("registerPassword").value;
-
-
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("registerForm").style.display = "none";
-    board.style.display = "block";
-}
+    function register() {
+        let registerUsername = document.getElementById("registerUsername").value;
+        let registerPassword = document.getElementById("registerPassword").value;
+        let confirmPassword = document.getElementById("confirmPassword").value;
+        let registerEmail = document.getElementById("registerEmail").value;
+    
+        if (registerPassword != confirmPassword){
+            alert("Passwords don't match");
+            return;
+        }
+        if (registerUsername == "" || registerPassword == "" || registerEmail == ""){return;}
+    
+        let xhr = new XMLHttpRequest();
+    
+        xhr.open('POST', '/snake/user/');
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({ 'username': registerUsername, 'password': registerPassword, email: registerEmail }));
+        xhr.onload = function() {
+            document.getElementById("registerUsername").value  = "";
+            document.getElementById("registerPassword").value = "";
+            document.getElementById("confirmPassword").value = "";
+            document.getElementById("registerEmail").value = "";
+            if (xhr.status != 200){
+                alert("Username or email already in use");
+                return;
+            }
+        }
+    }
 
 function logout(){
     userLoggedIn = false;
@@ -419,9 +430,12 @@ function logout(){
         element.style.display = "";
         element.parentElement.append(element.cloneNode(true).innerHTML = '');
     });
+    changeScores(1);
+    currentPage = 1;
 }
 
 function loadPersonalScores(){
+    console.log("Loading personal scores inside function");
     let xhr = new XMLHttpRequest();
         xhr.open('GET', '/snake/user_score/' + session.getItem("user"));
 
@@ -466,6 +480,7 @@ function loadPersonalScores(){
 
 
 function loadHighScores(){
+    console.log("Loading high scores inside function");
     let xhr = new XMLHttpRequest();
     xhr.open('GET', '/snake/highScores');
 
@@ -554,5 +569,16 @@ function changeScores(page){
         pagination.children[0].classList.remove("active");
         loadPersonalScores();
         currentPage = 2;
+    }
+}
+
+function updateCurrentValues(){
+    if (currentPage === 2) {
+        console.log("Loading personal scores");
+        loadPersonalScores();
+    }
+    else {
+        console.log("Loading high scores");
+        loadHighScores();
     }
 }

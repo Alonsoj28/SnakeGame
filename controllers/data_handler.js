@@ -36,7 +36,7 @@ async function updateHighScores(username, score){
     console.log("data.top10: " + data[0].top10);
     data[0].top10.push(user_score);
     data[0].top10.sort((a, b) => b.score - a.score);
-    if(data[0].top10.length >= 10){
+    if(data[0].top10.length > 10){
         data[0].top10.pop();
     }
     let updatedData = UserModel(data[0]);
