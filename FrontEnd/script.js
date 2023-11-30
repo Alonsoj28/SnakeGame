@@ -349,7 +349,7 @@ function changeMusic(){
 
     }
 
-function login () {
+function login() {
     var loginUsername = document.getElementById("email").value;
     var loginPassword = document.getElementById("password").value;
     if (loginUsername == "" || loginPassword == ""){
@@ -385,6 +385,17 @@ function login () {
             var btnUser = document.getElementById("LoginName");
             btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + session.getItem("user");
             btnUser.setAttribute("data-bs-target", "#Logout");
+
+            if (score != 0){
+                let xhr = new XMLHttpRequest();
+                xhr.open('POST', '/snake/score');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.send(JSON.stringify({ 'username': session.getItem("user"), 'score': score }));
+                xhr.onload = function() {
+                    console.log(xhr.response);
+                }
+            }
+
         }
     }
 
