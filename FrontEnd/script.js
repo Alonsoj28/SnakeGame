@@ -321,3 +321,50 @@ function changeMusic(){
 function findHighScores(){
     //Hacer un get de usuarios con sus scores, ver que que lugar quedo el score actual. Si es mayor al ultimo Agregar Score con el usuario
 }
+
+
+function login () {
+   
+    var loginUsername = document.getElementById("loginUsername").value;
+    var loginPassword = document.getElementById("loginPassword").value;
+
+    if (loginUsername === "" || loginPassword === "") {
+        // Mostrar un mensaje de error
+        document.getElementById("loginError").textContent = "Por favor, completa ambos campos.";
+    } else {
+        // Aquí debes realizar la lógica de autenticación en el servidor
+        // Por ejemplo, puedes enviar una solicitud AJAX al servidor
+
+        // Después de la autenticación exitosa, puedes mostrar el juego
+
+        var loginElements = document.querySelectorAll(".login_user");
+        loginElements.forEach(function(element) {
+            element.style.display = "none";
+        });
+    
+        // Obtener todos los botones con la clase "login_button"
+        var loginButtons = document.querySelectorAll(".login_button");
+    
+        // Iterar sobre los botones y cambiar su contenido de texto
+        loginButtons.forEach(function(button) {
+            button.textContent = "Cambiar usuario";
+        });
+    
+        // Mostrar el tablero o la sección de juego (board)
+        board.style.display = "block";
+    }
+}
+
+function register(event) {
+    event.preventDefault();
+    var registerUsername = document.getElementById("registerUsername").value;
+    var registerPassword = document.getElementById("registerPassword").value;
+
+    // Aquí debes realizar la lógica de registro en el servidor
+    // Por ejemplo, puedes enviar una solicitud AJAX al servidor
+
+    // Después del registro exitoso, puedes mostrar el juego
+    document.getElementById("loginForm").style.display = "none";
+    document.getElementById("registerForm").style.display = "none";
+    board.style.display = "block";
+}

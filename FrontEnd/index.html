@@ -59,7 +59,7 @@
         </div>
       
         <button onclick="restartGame()" class="startBtn mb-3" id="startBtn">Play again?</button>
-        <button class="gameRegister mb-3" data-bs-toggle="modal" data-bs-target="#login">Login to save your score</button>
+        <button class="gameRegister mb-3 login_user" data-bs-toggle="modal" data-bs-target="#login" class="login_user">Login to save your score</button>
       </div>
 
 
@@ -252,18 +252,18 @@
                         <!-- Aqui se añade cada jugador obtenido de la base de datos, obviamente estos son ejemplos... -->
                     </ul>
                 </div>
-                <div class="modal-footer justify-content-center">
+                <div class="modal-footer justify-content-center" class="login_user">
                     ¿Quieres participar?   <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">  Regístrate aquí</a>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true" class="login_user">
       <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
           <div class="modal-content">
               <div class="modal-header">
-                  <h5 class="modal-title" id="modalTitleId">Login</h5>
+                  <h5 class="modal-title login_user" id="modalTitleId">Login</h5>
                   <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
@@ -282,8 +282,8 @@
                               <span class="input-group-text" id="password-addon" style="margin-left: auto;"><i class="fa-solid fa-dungeon"></i></span>
                           </div>
                       </div>
-                      <div class="d-flex justify-content-center">
-                          <button type="submit" class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
+                      <div class="d-flex justify-content-center login_user">
+                          <button id = "LoginButtonHide" type="submit"  onclick="login()"     class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
                       </div>
                   </form>
               </div>
@@ -294,7 +294,7 @@
       </div>
   </div>
 
-  <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
+  <div class="modal fade login_user" id="register" tabindex="-1" role="dialog" aria-labelledby="registerModalTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document" style="max-width: 320px;">
         <div class="modal-content text-center">
             <div class="modal-header">
@@ -362,7 +362,7 @@
             <label class="scoreLabel">
                 Score: 0
             </label>
-            <div class="icon">
+            <div class="icon login_user_button">
                 <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
                   <i class="fa-solid fa-gamepad"></i> Login
                 </a>
