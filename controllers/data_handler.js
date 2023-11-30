@@ -72,7 +72,7 @@ async function getHighScores() {
 
 
 async function getUserByUsername(username) {
-    return UserModel.findOne({ username });
+    return await UserModel.findOne({ username });
 }
 async function getUserByEmail(email) {
     return UserModel.findOne({ email });
@@ -94,14 +94,15 @@ async function addScore(username, score) {
 }
 
 function getUserGameHistory(username) {
-    const user = getUserByUsername(username);
-
-    if (!user) {
-        return { error: 'Usuario no encontrado' };
-    }
-
-    const gameHistory = user.gameHistory.sort((a, b) => b[1] - a[1]); // Ordena el historial por puntuación de mayor a menor
-    return gameHistory;
+    return getUserByUsername(username).then((user) => {
+        console.log(user);
+        console.log(user.gameHistory);
+        if (!user) {
+            return 'Usuario no encontrado';
+        }
+    
+        return user.gameHistory.sort((a, b) => b.score - a.score).slice(0, 10);
+    });
 }
 
 

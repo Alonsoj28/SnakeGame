@@ -1,5 +1,7 @@
 GET http://localhost:3000/snake/user/2134
 ###
+GET http://localhost:3000/snake/user_score/2134
+###
 GET http://localhost:3000/snake/highScores
 ###
 POST http://localhost:3000/snake/score

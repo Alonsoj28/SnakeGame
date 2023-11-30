@@ -1,5 +1,16 @@
-var userLoggedIn = false;
-var storedUsername = null;
+// Variables para el login
+var session = localStorage;
+if (session.length === 0){
+    var userLoggedIn = false;
+    var storedUsername = null;
+}else{
+    var userLoggedIn = true;
+    var storedUsername = session.getItem("user");
+}
+
+var currentPage = 1;
+
+
 // Variables antes de iniciar el juego
 //Empieza en modo normal por default
 var selected_difficulty = 1;
@@ -217,6 +228,17 @@ function update(){
         gameStarted = 0;
         keyPressed = 0;
         gameoverScreen.style.display = '';
+        if (userLoggedIn){
+            let xhr = new XMLHttpRequest();
+            xhr.open('POST', '/snake/score');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify({ 'username': session.getItem("user"), 'score': score }));
+            xhr.onload = function() {
+                console.log(xhr.response);
+            }
+            if (currentPage === 1) loadPersonalScores();
+            else loadHighScores();
+        }
     }
 
     // Chocar con su propio cuerpo.
@@ -238,6 +260,17 @@ function update(){
                 gameStarted = 0;
                 keyPressed = 0;
                 gameoverScreen.style.display = '';
+                if (userLoggedIn){
+                    let xhr = new XMLHttpRequest();
+                    xhr.open('POST', '/snake/score');
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+                    xhr.send(JSON.stringify({ 'username': session.getItem("user"), 'score': score }));
+                    xhr.onload = function() {
+                        console.log(xhr.response);
+                    }
+                    if (currentPage === 2) loadPersonalScores();
+                    else loadHighScores();
+                }
             }
         }
     }
@@ -339,7 +372,7 @@ function login () {
             user = JSON.parse(user);
             if (user.username == loginUsername && user.password == loginPassword){
                 userLoggedIn = true;
-                storedUsername = loginUsername;
+                session.setItem("user", loginUsername);
                 checkSession();
             }
         }
@@ -355,8 +388,9 @@ function login () {
             });
 
             var btnUser = document.getElementById("LoginName");
-            btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + storedUsername;
-
+            btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + session.getItem("user");
+            btnUser.setAttribute("data-bs-target", "#Logout");
+            
 
         }
     }
@@ -370,6 +404,64 @@ function register(event) {
     document.getElementById("loginForm").style.display = "none";
     document.getElementById("registerForm").style.display = "none";
     board.style.display = "block";
+}
+
+function logout(){
+    userLoggedIn = false;
+    session.clear();
+
+    var btnUser = document.getElementById("LoginName");
+    btnUser.innerHTML = '<i class="fa-solid fa-gamepad"></i> ' + " Login";
+    btnUser.setAttribute("data-bs-target", "#login"); 
+
+    var loginElements = document.querySelectorAll(".logged");
+    loginElements.forEach(function(element) {
+        element.style.display = "";
+        element.parentElement.append(element.cloneNode(true).innerHTML = '');
+    });
+}
+
+function loadPersonalScores(){
+    let xhr = new XMLHttpRequest();
+        xhr.open('GET', '/snake/user_score/' + session.getItem("user"));
+
+        xhr.onload = function(){
+            let data = xhr.response;
+            let scores = JSON.parse(data);
+            let scoreList = document.getElementById("leaderboardScores");
+            scoreList.innerHTML = "";
+            let newScore = document.createElement("li");
+            newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+    
+            let spanRank = document.createElement("span");
+            spanRank.classList.add("fw-bold");
+            spanRank.textContent = "Date Played";
+            newScore.appendChild(spanRank);
+    
+            let spanScore = document.createElement("span");
+            spanScore.classList.add("fw-bold");
+            spanScore.textContent = "Score";
+            newScore.appendChild(spanScore);
+    
+            scoreList.appendChild(newScore);
+    
+            for (let i = 0; i < scores.length; i++) {
+                let newScore = document.createElement("li");
+                newScore.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+            
+                let spanDate = document.createElement("span");
+                spanDate.textContent = scores[i].date.split(" ").splice(1, 3).join("/");
+                newScore.appendChild(spanDate);
+            
+                let spanScore = document.createElement("span");
+                spanScore.classList.add("badge", "rounded-pill", "custom-badge");
+                spanScore.textContent = scores[i].score;
+                newScore.appendChild(spanScore);
+            
+                scoreList.appendChild(newScore);
+            }
+        }
+        xhr.send();
 }
 
 
@@ -444,5 +536,23 @@ function loadHighScores(){
         }
     }
     xhr.send();
+}
 
+
+function changeScores(page){
+    if (page === currentPage) return;
+    else if (page === 1){
+        let pagination = document.getElementById("selectorScores");
+        pagination.children[1].classList.remove("active");
+        pagination.children[0].classList.add("active");
+        loadHighScores();
+        currentPage = 1;
+    }else{
+        if (!userLoggedIn) return;
+        let pagination = document.getElementById("selectorScores");
+        pagination.children[1].classList.add("active");
+        pagination.children[0].classList.remove("active");
+        loadPersonalScores();
+        currentPage = 2;
+    }
 }

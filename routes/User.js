@@ -52,17 +52,19 @@ router.post('/score', (req, res) => {
 
 
 //Get GameHistory
-router.get('/user_score', (req, res) => {
-  const { username } = req.query;
+router.get('/user_score/:id', (req, res) => {
+    console.log("Getting user game history, id: " + req.params.id);
+    const username = req.params.id;
+    console.log(username);
 
-  if (!username) {
-      return res.status(400).json({ error: 'El parámetro "username" es requerido para obtener el historial de partidas' });
-  }
+    if (!username) {
+        return res.status(400).json({ error: 'El parámetro "username" es requerido para obtener el historial de partidas' });
+    }
 
-  dataHandler.getUserGameHistory(username).then((userGameHistory) => {
-        console.log(userGameHistory);
-        res.json(userGameHistory);
-  });
+    dataHandler.getUserGameHistory(username).then((userGameHistory) => {
+            console.log(userGameHistory);
+            res.send(userGameHistory);
+    });
 });
 
 router.get('/user/:id', (req, res) => {
