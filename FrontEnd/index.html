@@ -267,7 +267,6 @@
                   <button style="background-color: white;"  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                  <form>
                       <label for="email">Username</label>
                       <div class="mb-3 d-flex justify-content-end">
                           <div class="input-group">
@@ -283,9 +282,8 @@
                           </div>
                       </div>
                       <div class="d-flex justify-content-center login_user">
-                          <button id = "LoginButtonHide" type="submit"  onclick="login()"     class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
+                          <button id="LoginButtonHide" type="submit"  onclick="login()" class="btn btn-primary"> <i class="fa-solid fa-right-to-bracket fa-beat-fade"></i> Login</button>
                       </div>
-                  </form>
               </div>
               <div class="modal-footer justify-content-center">
                   ¿No tienes cuenta? <a style="color: rgb(255, 255, 255);" role="button" class="nav-link register" href="#" data-bs-toggle="modal" data-bs-target="#register">Regístrate aquí</a>
@@ -363,7 +361,7 @@
                 Score: 0
             </label>
             <div class="icon login_user_button">
-                <a role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
+                <a id="LoginName" role="button" class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#login">
                   <i class="fa-solid fa-gamepad"></i> Login
                 </a>
             </div>

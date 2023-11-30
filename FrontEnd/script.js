@@ -1,4 +1,5 @@
-
+var userLoggedIn = false;
+var storedUsername = null;
 // Variables antes de iniciar el juego
 //Empieza en modo normal por default
 var selected_difficulty = 1;
@@ -75,6 +76,7 @@ var foodY = blockSize * 10;
 var gameOver;
 
 window.onload = function(){
+    checkSession();
     board = document.getElementById("board");
     board.height = rows * blockSize;
     board.width = cols * blockSize;
@@ -324,36 +326,40 @@ function findHighScores(){
 
 
 function login () {
-   
-    var loginUsername = document.getElementById("loginUsername").value;
-    var loginPassword = document.getElementById("loginPassword").value;
-
-    if (loginUsername === "" || loginPassword === "") {
-        // Mostrar un mensaje de error
-        document.getElementById("loginError").textContent = "Por favor, completa ambos campos.";
-    } else {
-        // Aquí debes realizar la lógica de autenticación en el servidor
-        // Por ejemplo, puedes enviar una solicitud AJAX al servidor
-
-        // Después de la autenticación exitosa, puedes mostrar el juego
-
-        var loginElements = document.querySelectorAll(".login_user");
-        loginElements.forEach(function(element) {
-            element.style.display = "none";
-        });
-    
-        // Obtener todos los botones con la clase "login_button"
-        var loginButtons = document.querySelectorAll(".login_button");
-    
-        // Iterar sobre los botones y cambiar su contenido de texto
-        loginButtons.forEach(function(button) {
-            button.textContent = "Cambiar usuario";
-        });
-    
-        // Mostrar el tablero o la sección de juego (board)
-        board.style.display = "block";
+    var loginUsername = document.getElementById("email").value;
+    var loginPassword = document.getElementById("password").value;
+    let xhr = new XMLHttpRequest();
+    xhr.open('get', '/snake/user/' + loginUsername);
+    xhr.send();
+    xhr.onload = function() {
+        let user = xhr.response;
+        if (user == ''){
+            console.log("Usuario no existe");
+        }else {
+            user = JSON.parse(user);
+            if (user.username == loginUsername && user.password == loginPassword){
+                console.log("Login exitoso");
+                userLoggedIn = true;
+                storedUsername = loginUsername;
+                checkSession();
+            }else{
+                console.log("Contraseña o usuario incorrecto");
+            }
+        }
     }
-}
+    }
+
+    function checkSession(){
+        if (userLoggedIn){
+            var loginElements = document.querySelectorAll(".login_user");
+            loginElements.forEach(function(element) {
+                element.style.display = "none";
+            });
+
+            var btnUser = document.getElementById("LoginName");
+            btnUser.textContent = storedUsername;
+        }
+    }
 
 function register(event) {
     event.preventDefault();
