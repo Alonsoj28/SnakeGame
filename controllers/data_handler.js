@@ -2,7 +2,6 @@ const User = require('../controllers/Users.js'); // Importa la clase User
 const fs = require('fs');
 const path = require('path');
 const UserModel = require('../models/User');
-const TopScoresModel = require('../models/User');
 
 async function registerUser(username, password, email) {
     console.log("Async registering user");
@@ -27,19 +26,27 @@ async function registerUser(username, password, email) {
     }
 }
 
-async function updateHighScores(username, score)
-{
+async function updateHighScores(username, score){
+    console.log("Async updating highscores");
     try{
-    const user_score = [username, score]
-    console.log("Update HighScores");
+    const user_score = {"username": username, "score": score};
+    console.log("Updating HighScores");
     const data = await UserModel.find({ "Scores" : true });
-    data.top10.push(user_score);
-    data.top10.sort((a,b) => b.score - a.score);
-    data.top10.pop();
-    await data.save();
-    return "Felicidades, nuevo highscore"
+    console.log("data: " + data);
+    console.log("data.top10: " + data[0].top10);
+    data[0].top10.push(user_score);
+    data[0].top10.sort((a, b) => b.score - a.score);
+    if(data[0].top10.length >= 10){
+        data[0].top10.pop();
     }
-    catch{
+    let updatedData = UserModel(data[0]);
+    updatedData.save().then(() => {
+        console.log("saved new high scores");
+        return "Actualizado correctamente!"
+    });
+
+    }
+    catch(error){
         console.log(error);
         return 'Error al obtener los highScores';
     }
@@ -101,6 +108,7 @@ function getUserGameHistory(username) {
 
 module.exports = {
     registerUser: registerUser,
+    updateHighScores: updateHighScores,
     getUserByUsername: getUserByUsername,
     getUserGameHistory: getUserGameHistory,
     addScore: addScore,

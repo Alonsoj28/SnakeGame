@@ -40,7 +40,7 @@ router.post('/score', (req, res) => {
                     console.log(updateHighScoresResult);
                     res.send(updateHighScoresResult);
                 })
-                .catch(error => {
+                .catch((error) => {
                     res.status(500).send('Error al actualizar highscores' );
                 });
         })

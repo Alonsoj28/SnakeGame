@@ -6,8 +6,8 @@ POST http://localhost:3000/snake/score
 Content-Type: application/json
 
 {
-  "username": "2134",
-  "score": 100
+  "username": "Juan",
+  "score": 120
 }
 ###
 POST http://localhost:3000/snake/user
