@@ -395,15 +395,21 @@ function login () {
         }
     }
 
-function register(event) {
-    event.preventDefault();
-    var registerUsername = document.getElementById("registerUsername").value;
-    var registerPassword = document.getElementById("registerPassword").value;
+function register() {
+
+    let registerUsername = document.getElementById("registerUsername").value;
+    let registerPassword = document.getElementById("registerPassword").value;
+    let reigsteremail = document.getElementById("reigsteremail").value;
 
 
-    document.getElementById("loginForm").style.display = "none";
-    document.getElementById("registerForm").style.display = "none";
-    board.style.display = "block";
+    let xhr = new XMLHttpRequest();
+
+    xhr.open('POST', '/snake/user/');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ 'username': registerUsername, 'password': registerPassword, email: reigsteremail }));
+    xhr.onload = function() {
+        console.log(xhr.response);
+    }
 }
 
 function logout(){
