@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 
-let userData = "mongodb+srv://juanalonso:m47GLxAVtoBUQgwY@gamedata.vvtcdyn.mongodb.net/GameData?retryWrites=true&w=majority";
+let userData = "mongodb+srv://juanalonso:m47GLxAVtoBUQgwY@gamedata.ctzfv08.mongodb.net/";
 
 let db = mongoose.connection;
 

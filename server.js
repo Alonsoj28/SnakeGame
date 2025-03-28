@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 
-// Importa el router que configuraste en router.js
+// Importa el router que configure en router.js
 const router = require("../Proyecto_DASW/controllers/router");
 
 const app = express();
